@@ -23,6 +23,7 @@ pluginBundle {
     tags = listOf("jxbrowser")
 }
 
+// Used only for testing.
 publishing {
     repositories {
         maven {
