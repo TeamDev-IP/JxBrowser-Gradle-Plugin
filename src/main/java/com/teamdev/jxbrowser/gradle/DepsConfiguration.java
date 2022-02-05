@@ -22,13 +22,13 @@ import static java.lang.String.format;
  *         version = "7.21.2"
  *
  *         // Use JxBrowser repository at specific location. It's the US by default.
- *         repositoryLocation = JxBrowserRepository.US
+ *         repositoryLocation = Repository.US
  *
  *         // Or use your custom repository. If set, this field is preferred.
  *         repositoryUrl = "https://my.custom.repository"
  *
  *         // Include JxBrowser EAP repository.
- *         includePreviewBuilds = true
+ *         includePreviewBuilds()
  *     }
  * </pre>
  */
@@ -58,9 +58,16 @@ public abstract class DepsConfiguration {
     /**
      * Indicates whether the repository with the preview builds should be added to the project.
      */
-    public boolean includePreviewBuilds;
+    boolean includePreviewBuilds;
 
     private Project project;
+
+    /**
+     * Adds a JxBrowser EAP repository to the project.
+     */
+    public void includePreviewBuilds() {
+        includePreviewBuilds = true;
+    }
 
     /**
      * Returns a dependency notation for the {@code jxbrowser}, an artifact with the core API of the library.

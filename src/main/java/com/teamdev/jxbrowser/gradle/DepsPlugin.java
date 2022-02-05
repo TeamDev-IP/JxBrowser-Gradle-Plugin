@@ -22,7 +22,7 @@ import org.gradle.api.Project;
  *         repositoryUrl = "https://my.custom.repository"
  *
  *         // Include JxBrowser EAP repository.
- *         includePreviewBuilds = true
+ *         includePreviewBuilds()
  *     }
  * </pre>
  */
