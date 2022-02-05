@@ -26,13 +26,13 @@ import org.gradle.api.Project;
  *     }
  * </pre>
  */
-public class JxBrowserDepsPlugin implements Plugin<Project> {
+public class DepsPlugin implements Plugin<Project> {
 
     public static final String EAP_REPOSITORY = "https://europe-maven.pkg.dev/jxbrowser/eaps";
 
     @Override
     public void apply(Project project) {
-        JxBrowserDeps extension = project.getExtensions().create("jxbrowser", JxBrowserDeps.class);
+        DepsConfiguration extension = project.getExtensions().create("jxbrowser", DepsConfiguration.class);
         extension.project(project);
 
         project.getRepositories().maven(repository -> {

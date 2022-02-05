@@ -4,7 +4,7 @@ import org.gradle.api.Project;
 import org.gradle.api.provider.Provider;
 
 import static com.teamdev.jxbrowser.gradle.Environment.*;
-import static com.teamdev.jxbrowser.gradle.JxBrowserRepository.US;
+import static com.teamdev.jxbrowser.gradle.Repository.US;
 import static java.lang.String.format;
 
 /**
@@ -32,7 +32,7 @@ import static java.lang.String.format;
  *     }
  * </pre>
  */
-public abstract class JxBrowserDeps {
+public abstract class DepsConfiguration {
 
     private final static String GROUP = "com.teamdev.jxbrowser";
 
@@ -46,7 +46,7 @@ public abstract class JxBrowserDeps {
     /**
      * The preferred location of the JxBrowser repository.
      */
-    public JxBrowserRepository repositoryLocation = US;
+    public Repository repositoryLocation = US;
 
     /**
      * The URL of the repository.

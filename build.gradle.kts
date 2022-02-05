@@ -11,8 +11,11 @@ gradlePlugin {
     plugins {
         create("jxbrowser-deps") {
             id = "com.teamdev.jxbrowser.gradle"
-            displayName = "Provides dependencies for JxBrowser"
-            displayName = "This plug-in allows to specify JxBrowser dependencies in a human-friendly manner."
+            displayName = "Add JxBrowser repository and dependencies to the project"
+            description = """
+                This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
+                JxBrowser dependencies.
+            """.trimIndent()
             implementationClass = "com.teamdev.jxbrowser.gradle.JxBrowserDepsPlugin"
         }
     }

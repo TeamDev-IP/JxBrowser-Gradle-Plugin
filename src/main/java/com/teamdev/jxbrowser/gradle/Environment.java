@@ -25,7 +25,6 @@ final class Environment {
         return osName().startsWith("Mac");
     }
 
-
     /**
      * Returns {@code true} if the current operating system is Linux.
      */
