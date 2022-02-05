@@ -16,7 +16,7 @@ gradlePlugin {
                 This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
                 JxBrowser dependencies.
             """.trimIndent()
-            implementationClass = "com.teamdev.jxbrowser.gradle.JxBrowserDepsPlugin"
+            implementationClass = "com.teamdev.jxbrowser.gradle.DepsPlugin"
         }
     }
 }

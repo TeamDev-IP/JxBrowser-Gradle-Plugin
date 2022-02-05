@@ -45,14 +45,12 @@ public class DepsPlugin implements Plugin<Project> {
             }));
         });
 
-        project.getRepositories().maven(repository -> {
-            repository.setUrl(project.getProviders().provider(() -> {
-                if (extension.includePreviewBuilds) {
-                    return EAP_REPOSITORY;
-                } else {
-                    return "";
-                }
-            }));
+        project.afterEvaluate(ignored -> {
+            if (extension.includePreviewBuilds) {
+                project.getRepositories().maven(repository -> {
+                    repository.setUrl(EAP_REPOSITORY);
+                });
+            }
         });
     }
 }
