@@ -1,6 +1,6 @@
 # JxBrowser-Gradle-Plugin
 
-This is a Gradle plug-in that provides convenience methods for adding JxBrowser dependencies to a project.
+This is a Gradle plug-in that provides convenience methods for adding JxBrowser dependencies into a project.
 
 ## Usage
 
@@ -10,15 +10,16 @@ plugins {
 }
 
 jxbrowser {
-    // Specify JxBrowser version, a mandatory field.
+    // The JxBrowser version. A mandatory field.
     version = "7.21.2"
-
-    // Or use your own repository. If set, this field overrides `repositoryLocation`.
-    repositoryUrl = "https://my.custom.repository"
 
     // The location of JxBrowser repository to use. It's either US or Europe.
     // By default, it's the US.
     repositoryLocation = Repository.US
+
+    // A custom Maven repository. 
+    // If set, this field overrides `repositoryLocation`.
+    repositoryUrl = "https://my.custom.repository"
 
     // Adds JxBrowser EAP repository to the project.
     includePreviewBuilds()
@@ -45,3 +46,7 @@ dependencies {
     implementation(jxbrowser.linuxArm())
 }
 ```
+
+---
+
+The information in this repository is provided on the following terms: https://www.teamdev.com/terms-and-privacy

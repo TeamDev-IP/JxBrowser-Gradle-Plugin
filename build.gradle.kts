@@ -22,8 +22,9 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "https://teamdev.com/jxbrowser"
     tags = listOf("jxbrowser")
+    website = "https://teamdev.com/jxbrowser"
+    vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
 }
 
 // Used only for testing.
