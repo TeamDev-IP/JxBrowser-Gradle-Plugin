@@ -31,7 +31,7 @@ gradlePlugin {
     plugins {
         create("jxbrowser-deps") {
             id = "com.teamdev.jxbrowser.gradle"
-            displayName = "Add JxBrowser repository and dependencies to the project"
+            displayName = "Adds JxBrowser repository and dependencies to the project"
             description = """
                 This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
                 JxBrowser dependencies.
