@@ -186,7 +186,7 @@ public abstract class DepsConfiguration {
                 return macArm();
             }
         }
-        throw new IllegalStateException("Failed to detect current platform.");
+        throw new IllegalStateException("The current platform is not supported by JxBrowser.");
     }
 
     private Provider<String> artifact(String suffix) {
