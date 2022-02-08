@@ -13,7 +13,7 @@ jxbrowser {
     // The JxBrowser version. A mandatory field.
     version = "7.21.2"
 
-    // The location of JxBrowser repository to use. It's either US or Europe.
+    // The location of JxBrowser repository to use. It's either the US or Europe.
     // By default, it's the US.
     repositoryLocation = Repository.US
 
@@ -29,7 +29,7 @@ dependencies {
     // Adds a dependency to the core JxBrowser API.
     implementation(jxbrowser.core())
 
-    // Adds dependencies to the UI toolkit integrations:
+    // Adds dependencies to the UI toolkit integrations.
     implementation(jxbrowser.swt())
     implementation(jxbrowser.swing())
     implementation(jxbrowser.javafx())
