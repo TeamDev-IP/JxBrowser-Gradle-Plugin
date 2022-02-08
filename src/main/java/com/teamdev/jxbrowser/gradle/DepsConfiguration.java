@@ -28,7 +28,8 @@ import static com.teamdev.jxbrowser.gradle.Repository.US;
 import static java.lang.String.format;
 
 /**
- * Returns JxBrowser artifacts as dependency notation strings.
+ * Configures JxBrowser repository and provides dependency notations for the
+ * artifacts.
  *
  * <p>Usage example:
  * <pre>
