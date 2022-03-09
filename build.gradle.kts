@@ -25,7 +25,7 @@ plugins {
 }
 
 group = "com.teamdev.jxbrowser"
-version = "0.0.1"
+version = "0.0.2"
 
 gradlePlugin {
     plugins {
@@ -43,7 +43,7 @@ gradlePlugin {
 
 pluginBundle {
     tags = listOf("jxbrowser")
-    website = "https://teamdev.com/jxbrowser"
+    website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
     vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
 }
 
