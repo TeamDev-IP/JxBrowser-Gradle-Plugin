@@ -161,6 +161,14 @@ public abstract class DepsConfiguration {
     }
 
     /**
+     * Returns a dependency notation for the {@code jxbrowser-cross-platform}, an artifact that includes
+     * binaries for all supported platforms.
+     */
+    public Provider<String> crossPlatform() {
+        return artifact("cross-platform");
+    }
+
+    /**
      * Detects the current platform and returns a dependency notation for the corresponding module with binaries.
      */
     public Provider<String> currentPlatform() {
