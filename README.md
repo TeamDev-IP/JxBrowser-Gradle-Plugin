@@ -36,6 +36,9 @@ dependencies {
 
     // Detects the current platform and adds the corresponding Chromium binaries.
     implementation(jxbrowser.currentPlatform())
+    
+    // Adds dependencies with binaries for all supported platforms.
+    implementation(jxbrowser.crossPlatform())
 
     // Adds a dependency to specific Chromium binaries.
     implementation(jxbrowser.mac())
