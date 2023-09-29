@@ -34,12 +34,13 @@ import org.gradle.api.Project;
  *     }
  *
  *     jxbrowser {
- *         version = "7.21.2"
- *         // Use JxBrowser repository at specific location. It's the US by default.
- *         repositoryLocation = JxBrowserRepository.US
+ *         version = "7.35"
  *
- *         // Or use your custom repository. If set, this field is preferred.
- *         repositoryUrl = "https://my.custom.repository"
+ *         // Use JxBrowser repository at specific location. It's the US by default.
+ *         repository = Repository.US
+ *
+ *         // Or use your custom repository.
+ *         // repository = "https://my.custom.repository"
  *
  *         // Include JxBrowser EAP repository.
  *         includePreviewBuilds()
@@ -56,13 +57,7 @@ public class DepsPlugin implements Plugin<Project> {
         extension.project(project);
 
         project.getRepositories().maven(repository -> {
-            repository.setUrl(project.getProviders().provider(() -> {
-                if (extension.repositoryUrl != null) {
-                    return extension.repositoryUrl;
-                } else {
-                    return extension.repositoryLocation.url();
-                }
-            }));
+            repository.setUrl(project.getProviders().provider(() -> extension.repository));
         });
 
         project.afterEvaluate(ignored -> {
