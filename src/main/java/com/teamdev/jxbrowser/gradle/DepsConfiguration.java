@@ -40,7 +40,7 @@ import static java.lang.String.format;
  *
  *     jxbrowser {
  *         // JxBrowser version.
- *         version = "7.35"
+ *         version = "7.35.1"
  *
  *         // Use JxBrowser repository at specific location. It's the US by default.
  *         repository = Repository.US

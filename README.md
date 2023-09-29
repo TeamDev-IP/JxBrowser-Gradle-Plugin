@@ -11,7 +11,7 @@ plugins {
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
-    version = "7.35"
+    version = "7.35.1"
 
     // The location of JxBrowser repository to use. It's either the US or Europe.
     // By default, it's the US.
