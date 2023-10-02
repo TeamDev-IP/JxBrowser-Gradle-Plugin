@@ -6,7 +6,7 @@ This is a Gradle plug-in that provides convenience methods for adding JxBrowser 
 
 ```kotlin
 plugins {
-    id("com.teamdev.jxbrowser") version "0.0.3"
+    id("com.teamdev.jxbrowser") version "0.0.4"
 }
 
 jxbrowser {
