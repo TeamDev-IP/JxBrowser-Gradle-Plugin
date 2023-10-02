@@ -21,30 +21,28 @@
 plugins {
     `java-gradle-plugin`
     id("maven-publish")
-    id("com.gradle.plugin-publish") version "0.18.0"
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 group = "com.teamdev.jxbrowser"
 version = "0.0.3"
 
 gradlePlugin {
+
     plugins {
+        website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
+        vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
         create("jxbrowser-deps") {
-            id = "com.teamdev.jxbrowser.gradle"
+            id = "com.teamdev.jxbrowser"
             displayName = "Adds JxBrowser repository and dependencies to the project"
             description = """
                 This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
                 JxBrowser dependencies.
             """.trimIndent()
             implementationClass = "com.teamdev.jxbrowser.gradle.DepsPlugin"
+            tags = listOf("jxbrowser")
         }
     }
-}
-
-pluginBundle {
-    tags = listOf("jxbrowser")
-    website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
-    vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
 }
 
 // Used only for testing.
