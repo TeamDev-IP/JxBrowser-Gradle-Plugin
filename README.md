@@ -13,9 +13,9 @@ jxbrowser {
     // The JxBrowser version. A mandatory field.
     version = "7.35.1"
 
-    // The location of JxBrowser repository to use. It's either the US or Europe.
-    // By default, it's the US.
-    repository = Repository.US
+    // The location of JxBrowser repository to use. It's either North America or Europe.
+    // By default, it's North America.
+    repository = Repository.NORTH_AMERICA
 
     // Alternatively, it may point to a custom repo via its URL, as follows:
     // repository = "https://my.custom.repository"

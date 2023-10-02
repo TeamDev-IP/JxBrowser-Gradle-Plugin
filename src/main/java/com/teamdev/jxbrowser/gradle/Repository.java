@@ -26,9 +26,9 @@ package com.teamdev.jxbrowser.gradle;
 public final class Repository {
 
     /**
-     * A repository located in the United States.
+     * A repository located in North America.
      */
-    public static final String US = "https://us-maven.pkg.dev/jxbrowser/releases";
+    public static final String NORTH_AMERICA = "https://us-maven.pkg.dev/jxbrowser/releases";
 
     /**
      * A repository located in Europe.

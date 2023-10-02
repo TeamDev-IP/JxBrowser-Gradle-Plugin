@@ -36,8 +36,8 @@ import org.gradle.api.Project;
  *     jxbrowser {
  *         version = "7.35.1"
  *
- *         // Use JxBrowser repository at specific location. It's the US by default.
- *         repository = Repository.US
+ *         // Use JxBrowser repository at specific location. It's North America by default.
+ *         repository = Repository.NORTH_AMERICA
  *
  *         // Or use your custom repository.
  *         // repository = "https://my.custom.repository"

@@ -24,7 +24,7 @@ import org.gradle.api.Project;
 import org.gradle.api.provider.Provider;
 
 import static com.teamdev.jxbrowser.gradle.Environment.*;
-import static com.teamdev.jxbrowser.gradle.Repository.US;
+import static com.teamdev.jxbrowser.gradle.Repository.NORTH_AMERICA;
 import static java.lang.String.format;
 
 /**
@@ -42,8 +42,8 @@ import static java.lang.String.format;
  *         // JxBrowser version.
  *         version = "7.35.1"
  *
- *         // Use JxBrowser repository at specific location. It's the US by default.
- *         repository = Repository.US
+ *         // Use JxBrowser repository at specific location. It's North America by default.
+ *         repository = Repository.NORTH_AMERICA
  *
  *         // Or use your custom repository.
  *         // repository = "https://my.custom.repository"
@@ -67,7 +67,7 @@ public abstract class DepsConfiguration {
     /**
      * The preferred location of the JxBrowser repository.
      */
-    public String repository = US;
+    public String repository = NORTH_AMERICA;
 
     /**
      * Indicates whether the repository with the preview builds should be added to the project.
