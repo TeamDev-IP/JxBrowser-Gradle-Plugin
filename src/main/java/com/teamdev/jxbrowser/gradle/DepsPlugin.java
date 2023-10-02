@@ -62,9 +62,7 @@ public class DepsPlugin implements Plugin<Project> {
 
         project.afterEvaluate(ignored -> {
             if (extension.includePreviewBuilds) {
-                project.getRepositories().maven(repository -> {
-                    repository.setUrl(EAP_REPOSITORY);
-                });
+                project.getRepositories().maven(repository -> repository.setUrl(EAP_REPOSITORY));
             }
         });
     }
