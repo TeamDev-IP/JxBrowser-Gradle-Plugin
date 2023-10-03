@@ -23,25 +23,15 @@ package com.teamdev.jxbrowser.gradle;
 /**
  * Available JxBrowser repositories.
  */
-public enum Repository {
+public final class Repository {
 
     /**
-     * A repository located in the United States.
+     * A repository located in North America.
      */
-    US("https://us-maven.pkg.dev/jxbrowser/releases"),
+    public static final String NORTH_AMERICA = "https://us-maven.pkg.dev/jxbrowser/releases";
 
     /**
      * A repository located in Europe.
      */
-    EUROPE("https://europe-maven.pkg.dev/jxbrowser/releases");
-
-    private final String url;
-
-    Repository(String url) {
-        this.url = url;
-    }
-
-    String url() {
-        return url;
-    }
+    public static final String EUROPE = "https://europe-maven.pkg.dev/jxbrowser/releases";
 }
