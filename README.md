@@ -1,6 +1,6 @@
-# JxBrowser-Gradle-Plugin
+# JxBrowser Gradle Plugin
 
-This is a Gradle plug-in that provides convenience methods for adding JxBrowser dependencies into a project.
+A Gradle plug-in that provides convenience methods for adding JxBrowser dependencies into a project.
 
 ## Usage
 

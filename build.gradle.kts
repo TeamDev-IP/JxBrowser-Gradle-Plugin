@@ -18,8 +18,11 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `java-gradle-plugin`
+    kotlin("jvm") version "1.9.10"
     id("maven-publish")
     id("com.gradle.plugin-publish") version "1.2.1"
 }
@@ -27,8 +30,27 @@ plugins {
 group = "com.teamdev.jxbrowser"
 version = "0.0.4"
 
-gradlePlugin {
+repositories {
+    mavenCentral()
+}
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
+    testImplementation(kotlin("test"))
+}
+
+gradlePlugin {
     plugins {
         website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
         vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
@@ -36,7 +58,7 @@ gradlePlugin {
             id = "com.teamdev.jxbrowser"
             displayName = "Adds JxBrowser repository and dependencies to the project"
             description = """
-                This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
+                Adds JxBrowser repository to the project and provides convenience methods for applying
                 JxBrowser dependencies.
             """.trimIndent()
             implementationClass = "com.teamdev.jxbrowser.gradle.DepsPlugin"
@@ -53,4 +75,8 @@ publishing {
             url = uri("../local-plugin-repository")
         }
     }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

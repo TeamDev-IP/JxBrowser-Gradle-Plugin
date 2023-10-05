@@ -18,76 +18,53 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.teamdev.jxbrowser.gradle;
+package com.teamdev.jxbrowser.gradle
 
 /**
  * Provides the details about the current operating system and JVM architecture.
  */
-final class Environment {
+internal object Environment {
 
     /**
-     * Returns {@code true} if the current operating system is Windows.
+     * Returns `true` if the current operating system is Windows.
      */
-    public static boolean isWindows() {
-        return osName().startsWith("Windows");
-    }
+    fun isWindows() = osName().startsWith("Windows")
 
     /**
-     * Returns {@code true} if the current operating system is macOS.
+     * Returns `true` if the current operating system is macOS.
      */
-    public static boolean isMac() {
-        return osName().startsWith("Mac");
-    }
+    fun isMac() = osName().startsWith("Mac")
 
     /**
-     * Returns {@code true} if the current operating system is Linux.
+     * Returns `true` if the current operating system is Linux.
      */
-    public static boolean isLinux() {
-        return osName().startsWith("Linux");
-    }
+    fun isLinux() = osName().startsWith("Linux")
 
     /**
      * Indicates whether the current JVM's architecture is 64-bit.
      */
-    static boolean isX64Bit() {
-        String arch = jvmArch();
-        return "amd64".equals(arch) || "x86_64".equals(arch);
+    fun isX64Bit(): Boolean {
+        val arch = jvmArch()
+        return arch == "amd64" || arch == "x86_64"
     }
 
     /**
      * Indicates whether the current JVM's architecture is 32-bit.
      */
-    static boolean is32Bit() {
-        String arch = jvmArch();
-        return "x86".equals(arch) || "i386".equals(arch);
+    fun is32Bit(): Boolean {
+        val arch = jvmArch()
+        return arch == "x86" || arch == "i386"
     }
 
     /**
      * Indicates whether the current JVM's architecture is ARM.
      */
-    static boolean isArm() {
-        String arch = jvmArch();
-        return "aarch64".equals(arch) || "arm".equals(arch);
+    fun isArm(): Boolean {
+        val arch = jvmArch()
+        return arch == "aarch64" || arch == "arm"
     }
 
-    /**
-     * Prevents instantiation of this utility class.
-     */
-    private Environment() {
-    }
+    private fun osName() = System.getProperty("os.name")
 
-    /**
-     * Obtains the value of the property via {@link System}.
-     */
-    private static String property(String name) {
-        return System.getProperty(name);
-    }
-
-    private static String osName() {
-        return property("os.name");
-    }
-
-    private static String jvmArch() {
-        return property("os.arch");
-    }
+    private fun jvmArch() = System.getProperty("os.arch")
 }
