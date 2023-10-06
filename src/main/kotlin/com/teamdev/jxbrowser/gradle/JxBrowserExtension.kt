@@ -48,7 +48,7 @@ import org.gradle.api.provider.Provider
  * }
  * ```
  */
-open class DepsExtension(private val project: Project) {
+open class JxBrowserExtension(private val project: Project) {
 
     /**
      * A version of the JxBrowser.

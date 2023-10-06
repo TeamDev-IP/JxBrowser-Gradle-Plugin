@@ -27,22 +27,11 @@ plugins {
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
-group = "com.teamdev.jxbrowser"
-version = "0.0.5"
+group = property("GROUP")
+version = property("VERSION")
 
 repositories {
     mavenCentral()
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
 }
 
 dependencies {
@@ -50,21 +39,23 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 gradlePlugin {
     plugins {
-        website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
-        vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
-        create("jxbrowser-deps") {
-            id = "com.teamdev.jxbrowser"
-            displayName = "Adds JxBrowser repository and dependencies to the project"
-            description = """
-                Adds JxBrowser repository to the project and provides convenience methods for applying
-                JxBrowser dependencies.
-            """.trimIndent()
-            implementationClass = "com.teamdev.jxbrowser.gradle.DepsPlugin"
+        create(property("NAME")) {
+            id = property("ID")
+            displayName = property("DISPLAY_NAME")
+            description = property("DESCRIPTION")
+            implementationClass = property("IMPLEMENTATION_CLASS")
             tags = listOf("jxbrowser")
         }
     }
+    website = property("WEBSITE")
+    vcsUrl = property("VCS_URL")
 }
 
 // Used only for testing.
@@ -77,6 +68,14 @@ publishing {
     }
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
 }
+
+fun property(name: String) = project.property(name).toString()

@@ -1,26 +1,28 @@
 package com.teamdev.jxbrowser.gradle
 
-import com.teamdev.jxbrowser.gradle.DepsPlugin.Companion.EAP_REPOSITORY_URL
+import com.teamdev.jxbrowser.gradle.JxBrowserPlugin.Companion.EAP_REPOSITORY_URL
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.*
 
-class DepsPluginTest {
+class JxBrowserPluginTest {
 
     private val pluginId = "com.teamdev.jxbrowser"
     private lateinit var project: Project
-    private lateinit var extension: DepsExtension
+    private lateinit var extension: JxBrowserExtension
 
     @BeforeTest
     fun setUp() {
         project = ProjectBuilder.builder().build()
         project.pluginManager.apply(pluginId)
-        extension = project.extensions.getByType(DepsExtension::class.java)
+        extension = project.extensions.getByType(JxBrowserExtension::class.java)
     }
 
     @Test
     fun `extension is created properly`() {
+        assertDoesNotThrow { project.extensions.getByName("jxbrowser") }
         assertFalse(extension.includePreviewBuilds)
         assertEquals(Repository.NORTH_AMERICA, extension.repository)
     }
