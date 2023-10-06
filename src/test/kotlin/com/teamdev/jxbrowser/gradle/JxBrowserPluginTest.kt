@@ -7,7 +7,7 @@ import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.*
 
-class JxBrowserPluginUnitTest {
+class JxBrowserPluginTest {
 
     private val pluginId = "com.teamdev.jxbrowser"
     private lateinit var project: Project
