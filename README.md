@@ -1,17 +1,17 @@
-# JxBrowser-Gradle-Plugin
+# JxBrowser Gradle Plugin
 
-This is a Gradle plug-in that provides convenience methods for adding JxBrowser dependencies into a project.
+A Gradle plug-in that provides convenience methods for adding JxBrowser dependencies into a project.
 
 ## Usage
 
 ```kotlin
 plugins {
-    id("com.teamdev.jxbrowser") version "0.0.4"
+    id("com.teamdev.jxbrowser") version "0.0.5"
 }
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
-    version = "7.35.1"
+    version = "7.35.2"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
     // By default, it's North America.
@@ -35,7 +35,7 @@ dependencies {
 
     // Detects the current platform and adds the corresponding Chromium binaries.
     implementation(jxbrowser.currentPlatform())
-    
+
     // Adds dependencies with binaries for all supported platforms.
     implementation(jxbrowser.crossPlatform())
 
