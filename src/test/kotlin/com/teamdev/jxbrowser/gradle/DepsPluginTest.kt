@@ -47,13 +47,13 @@ class DepsPluginTest {
     fun `maven repository is set correctly`() {
         val customRepository = "https://my.custom.repository"
         extension.repository = customRepository
-        assertTrue(mavenRepositories().contain(customRepository))
+        assertTrue(mavenRepositories().contains(customRepository))
 
         extension.includePreviewBuilds()
         project.evaluationDependsOn(":")
-        assertTrue(mavenRepositories().contain(EAP_REPOSITORY_URL))
+        assertTrue(mavenRepositories().contains(EAP_REPOSITORY_URL))
     }
 
     private fun mavenRepositories() = project.repositories.filterIsInstance(MavenArtifactRepository::class.java)
-    private fun List<MavenArtifactRepository>.contain(url: String) = this.any { it.url.toString() == url }
+    private fun List<MavenArtifactRepository>.contains(url: String) = this.any { it.url.toString() == url }
 }
