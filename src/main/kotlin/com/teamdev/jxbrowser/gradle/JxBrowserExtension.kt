@@ -55,7 +55,7 @@ open class JxBrowserExtension(private val project: Project) {
      *
      * This is a mandatory field.
      */
-    lateinit var version: String
+    var version: String = "+"
 
     /**
      * The preferred location of the JxBrowser repository.
