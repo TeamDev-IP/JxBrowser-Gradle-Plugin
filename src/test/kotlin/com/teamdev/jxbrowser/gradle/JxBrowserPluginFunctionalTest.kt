@@ -39,6 +39,7 @@ class JxBrowserPluginFunctionalTest {
             }
         """.trimIndent()
         )
+
         val result = GradleRunner.create()
             .withProjectDir(testProjectDir)
             .withPluginClasspath()
@@ -51,6 +52,8 @@ class JxBrowserPluginFunctionalTest {
     @Throws(IOException::class)
     fun `JxBrowser dependencies downloaded properly`() {
         val version = "7.35.2"
+        val taskName = "downloadJars"
+
         buildFile.writeText(
             """ 
             plugins {
@@ -79,18 +82,19 @@ class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.linuxArm())
             }
             
-            tasks.register<Copy>("downloadJars") {
+            tasks.register<Copy>("$taskName") {
                 from(configurations.getByName("toCopy"))
                 into("libs")
             }
         """.trimIndent()
         )
+
         val result = GradleRunner.create()
             .withProjectDir(testProjectDir)
             .withPluginClasspath()
-            .withArguments("downloadJars")
+            .withArguments(taskName)
             .build()
-        assertEquals(SUCCESS, result.task(":downloadJars")!!.outcome)
+        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
 
         val libsFolder = File(testProjectDir, "libs")
         assertTrue(libsFolder.exists())
