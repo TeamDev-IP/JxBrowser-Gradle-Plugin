@@ -5,10 +5,7 @@ import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import java.io.IOException
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class JxBrowserPluginFunctionalTest {
 
