@@ -5,7 +5,11 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.*
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class JxBrowserPluginTest {
 
