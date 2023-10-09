@@ -15,7 +15,7 @@ jobs:
       - name: Run ktlint check
         run: ./gradlew ktlintCheck
 
-  check:
+  tests:
     name: Tests
     runs-on: ubuntu-latest
 
