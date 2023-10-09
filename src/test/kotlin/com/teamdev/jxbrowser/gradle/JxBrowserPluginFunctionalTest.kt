@@ -5,7 +5,10 @@ import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import java.io.IOException
-import kotlin.test.*
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class JxBrowserPluginFunctionalTest {
 
@@ -22,7 +25,7 @@ class JxBrowserPluginFunctionalTest {
 
     @Test
     @Throws(IOException::class)
-    fun `project is built with the plugin successfully`() {
+    fun `project successfully built with the plugin`() {
         buildFile.writeText(
             """ 
             plugins {
@@ -50,7 +53,7 @@ class JxBrowserPluginFunctionalTest {
 
     @Test
     @Throws(IOException::class)
-    fun `JxBrowser dependencies downloaded properly`() {
+    fun `JxBrowser dependencies are downloaded correctly`() {
         val version = "7.35.2"
         val taskName = "downloadJars"
 
