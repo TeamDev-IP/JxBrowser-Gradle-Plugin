@@ -30,8 +30,8 @@ import org.gradle.api.Project
  *
  * ```kotlin
  * dependencies {
- *     implementation(jxbrowser.swing())
- *     implementation(jxbrowser.currentPlatform())
+ *     implementation(jxbrowser.swing)
+ *     implementation(jxbrowser.currentPlatform)
  * }
  *
  * jxbrowser {

@@ -26,26 +26,26 @@ jxbrowser {
 
 dependencies {
     // Adds a dependency to the core JxBrowser API.
-    implementation(jxbrowser.core())
+    implementation(jxbrowser.core)
 
     // Adds dependencies to the UI toolkit integrations.
-    implementation(jxbrowser.swt())
-    implementation(jxbrowser.swing())
-    implementation(jxbrowser.javafx())
+    implementation(jxbrowser.swt)
+    implementation(jxbrowser.swing)
+    implementation(jxbrowser.javafx)
 
     // Detects the current platform and adds the corresponding Chromium binaries.
-    implementation(jxbrowser.currentPlatform())
+    implementation(jxbrowser.currentPlatform)
 
     // Adds dependencies with binaries for all supported platforms.
-    implementation(jxbrowser.crossPlatform())
+    implementation(jxbrowser.crossPlatform)
 
     // Adds a dependency to specific Chromium binaries.
-    implementation(jxbrowser.mac())
-    implementation(jxbrowser.macArm())
-    implementation(jxbrowser.win32())
-    implementation(jxbrowser.win64())
-    implementation(jxbrowser.linux64())
-    implementation(jxbrowser.linuxArm())
+    implementation(jxbrowser.mac)
+    implementation(jxbrowser.macArm)
+    implementation(jxbrowser.win32)
+    implementation(jxbrowser.win64)
+    implementation(jxbrowser.linux64)
+    implementation(jxbrowser.linuxArm)
 }
 ```
 

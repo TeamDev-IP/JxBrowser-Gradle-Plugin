@@ -56,17 +56,17 @@ class JxBrowserPluginTest {
         val version = "1.0.0"
         extension.version = version
 
-        assertEquals("com.teamdev.jxbrowser:jxbrowser:$version", extension.core().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-javafx:$version", extension.javafx().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-swing:$version", extension.swing().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-swt:$version", extension.swt().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-win64:$version", extension.win64().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-win32:$version", extension.win32().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64:$version", extension.linux64().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64-arm:$version", extension.linuxArm().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac:$version", extension.mac().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac-arm:$version", extension.macArm().get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-cross-platform:$version", extension.crossPlatform().get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser:$version", extension.core.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-javafx:$version", extension.javafx.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-swing:$version", extension.swing.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-swt:$version", extension.swt.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-win64:$version", extension.win64.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-win32:$version", extension.win32.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64:$version", extension.linux64.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64-arm:$version", extension.linuxArm.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac:$version", extension.mac.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac-arm:$version", extension.macArm.get())
+        assertEquals("com.teamdev.jxbrowser:jxbrowser-cross-platform:$version", extension.crossPlatform.get())
     }
 
     @Test

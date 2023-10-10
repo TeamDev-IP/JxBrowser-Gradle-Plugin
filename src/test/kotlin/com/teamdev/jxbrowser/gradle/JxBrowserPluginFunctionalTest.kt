@@ -58,7 +58,7 @@ class JxBrowserPluginFunctionalTest {
             }
             
             dependencies {
-                implementation(jxbrowser.core())
+                implementation(jxbrowser.core)
             }
             """.trimIndent()
         )
@@ -93,16 +93,16 @@ class JxBrowserPluginFunctionalTest {
             }
             
             dependencies {
-                "toCopy"(jxbrowser.core())
-                "toCopy"(jxbrowser.swt())
-                "toCopy"(jxbrowser.swing())
-                "toCopy"(jxbrowser.javafx())
-                "toCopy"(jxbrowser.mac())
-                "toCopy"(jxbrowser.macArm())
-                "toCopy"(jxbrowser.win32())
-                "toCopy"(jxbrowser.win64())
-                "toCopy"(jxbrowser.linux64())
-                "toCopy"(jxbrowser.linuxArm())
+                "toCopy"(jxbrowser.core)
+                "toCopy"(jxbrowser.swt)
+                "toCopy"(jxbrowser.swing)
+                "toCopy"(jxbrowser.javafx)
+                "toCopy"(jxbrowser.mac)
+                "toCopy"(jxbrowser.macArm)
+                "toCopy"(jxbrowser.win32)
+                "toCopy"(jxbrowser.win64)
+                "toCopy"(jxbrowser.linux64)
+                "toCopy"(jxbrowser.linuxArm)
             }
             
             tasks.register<Copy>("$taskName") {
