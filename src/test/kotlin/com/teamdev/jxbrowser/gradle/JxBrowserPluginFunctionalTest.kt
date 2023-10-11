@@ -59,6 +59,7 @@ class JxBrowserPluginFunctionalTest {
             
             dependencies {
                 implementation(jxbrowser.core)
+                implementation(jxbrowser.currentPlatform)
             }
             """.trimIndent()
         )
@@ -73,9 +74,10 @@ class JxBrowserPluginFunctionalTest {
 
     @Test
     @Throws(IOException::class)
-    fun `JxBrowser dependencies are downloaded correctly`() {
+    fun `JxBrowser jars are downloaded correctly`() {
         val version = "7.35.2"
         val taskName = "downloadJars"
+        val libsPath = "libs"
 
         buildFile.writeText(
             """ 
@@ -107,7 +109,7 @@ class JxBrowserPluginFunctionalTest {
             
             tasks.register<Copy>("$taskName") {
                 from(configurations.getByName("toCopy"))
-                into("libs")
+                into("$libsPath")
             }
             """.trimIndent()
         )
@@ -119,7 +121,7 @@ class JxBrowserPluginFunctionalTest {
             .build()
         assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
 
-        val libsFolder = File(testProjectDir, "libs")
+        val libsFolder = File(testProjectDir, libsPath)
         assertTrue(libsFolder.exists())
         assertTrue(libsFolder.containsFile("jxbrowser-$version.jar"))
         assertTrue(libsFolder.containsFile("jxbrowser-javafx-$version.jar"))

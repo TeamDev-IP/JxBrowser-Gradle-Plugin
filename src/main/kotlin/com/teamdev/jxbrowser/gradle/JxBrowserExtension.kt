@@ -41,7 +41,7 @@ import org.gradle.api.provider.Provider
  * }
  *
  * jxbrowser {
- *     version = "7.35.1"
+ *     version = "7.35.2"
  *
  *     // Use JxBrowser repository at specific location. It's North America by default.
  *     repository = Repository.NORTH_AMERICA
@@ -151,9 +151,9 @@ open class JxBrowserExtension(private val project: Project) {
      * Detects the current platform and returns a dependency notation
      * for the corresponding module with binaries.
      */
-    val currentPlatform: Provider<String> = detectPlatform()
+    val currentPlatform: Provider<String> = currentPlatform()
 
-    private fun detectPlatform(): Provider<String> {
+    private fun currentPlatform(): Provider<String> {
         val platformMap = mapOf(
             Pair({ isX64Bit() && isWindows() }, win64),
             Pair({ isX64Bit() && isLinux() }, linux64),

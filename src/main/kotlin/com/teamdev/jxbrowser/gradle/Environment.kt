@@ -25,6 +25,10 @@ package com.teamdev.jxbrowser.gradle
  */
 internal object Environment {
 
+    private val ARCH_X64 = setOf("amd64", "x86_64")
+    private val ARCH_X86 = setOf("x86", "i386")
+    private val ARCH_ARM = setOf("aarch64", "arm")
+
     /**
      * Returns `true` if the current operating system is Windows.
      */
@@ -43,26 +47,17 @@ internal object Environment {
     /**
      * Indicates whether the current JVM's architecture is 64-bit.
      */
-    fun isX64Bit(): Boolean {
-        val arch = jvmArch()
-        return arch == "amd64" || arch == "x86_64"
-    }
+    fun isX64Bit() = jvmArch() in ARCH_X64
 
     /**
      * Indicates whether the current JVM's architecture is 32-bit.
      */
-    fun is32Bit(): Boolean {
-        val arch = jvmArch()
-        return arch == "x86" || arch == "i386"
-    }
+    fun is32Bit() = jvmArch() in ARCH_X86
 
     /**
      * Indicates whether the current JVM's architecture is ARM.
      */
-    fun isArm(): Boolean {
-        val arch = jvmArch()
-        return arch == "aarch64" || arch == "arm"
-    }
+    fun isArm() = jvmArch() in ARCH_ARM
 
     private fun osName() = System.getProperty("os.name")
 
