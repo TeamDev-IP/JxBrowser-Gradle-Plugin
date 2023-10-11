@@ -35,12 +35,14 @@ class JxBrowserPluginFunctionalTest {
     @TempDir
     lateinit var testProjectDir: File
     private lateinit var buildFile: File
+    private lateinit var libsFolder: File
 
     @BeforeTest
     fun setUp() {
         val settingsFile = File(testProjectDir, "settings.gradle.kts")
         settingsFile.writeText("rootProject.name = \"test-project\"")
         buildFile = File(testProjectDir, "build.gradle.kts")
+        libsFolder = File(testProjectDir, "libs")
     }
 
     @Test
@@ -69,6 +71,7 @@ class JxBrowserPluginFunctionalTest {
             .withPluginClasspath()
             .withArguments("build")
             .build()
+
         assertEquals(SUCCESS, result.task(":build")!!.outcome)
     }
 
@@ -77,7 +80,6 @@ class JxBrowserPluginFunctionalTest {
     fun `JxBrowser jars are downloaded correctly`() {
         val version = "7.35.2"
         val taskName = "downloadJars"
-        val libsPath = "libs"
 
         buildFile.writeText(
             """ 
@@ -109,7 +111,7 @@ class JxBrowserPluginFunctionalTest {
             
             tasks.register<Copy>("$taskName") {
                 from(configurations.getByName("toCopy"))
-                into("$libsPath")
+                into("libs")
             }
             """.trimIndent()
         )
@@ -119,10 +121,8 @@ class JxBrowserPluginFunctionalTest {
             .withPluginClasspath()
             .withArguments(taskName)
             .build()
-        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
 
-        val libsFolder = File(testProjectDir, libsPath)
-        assertTrue(libsFolder.exists())
+        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
         assertTrue(libsFolder.containsFile("jxbrowser-$version.jar"))
         assertTrue(libsFolder.containsFile("jxbrowser-javafx-$version.jar"))
         assertTrue(libsFolder.containsFile("jxbrowser-swing-$version.jar"))
@@ -133,6 +133,48 @@ class JxBrowserPluginFunctionalTest {
         assertTrue(libsFolder.containsFile("jxbrowser-linux64-arm-$version.jar"))
         assertTrue(libsFolder.containsFile("jxbrowser-mac-$version.jar"))
         assertTrue(libsFolder.containsFile("jxbrowser-mac-arm-$version.jar"))
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun `JxBrowser eap jar downloaded correctly`() {
+        val eapVersion = "7.35.1-b56-eap"
+        val taskName = "downloadJars"
+
+        buildFile.writeText(
+            """ 
+            plugins {
+                base
+                id("com.teamdev.jxbrowser")
+            }
+            
+            jxbrowser {
+                includePreviewBuilds()
+            }
+            
+            configurations {
+                create("toCopy")
+            }
+            
+            dependencies {
+                "toCopy"("com.teamdev.jxbrowser:jxbrowser:$eapVersion")
+            }
+            
+            tasks.register<Copy>("$taskName") {
+                from(configurations.getByName("toCopy"))
+                into("libs")
+            }
+            """.trimIndent()
+        )
+
+        val result = GradleRunner.create()
+            .withProjectDir(testProjectDir)
+            .withPluginClasspath()
+            .withArguments(taskName)
+            .build()
+
+        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
+        assertTrue(libsFolder.containsFile("jxbrowser-$eapVersion.jar"))
     }
 
     private fun File.containsFile(name: String) = this.listFiles()!!.any { it.name == name }
