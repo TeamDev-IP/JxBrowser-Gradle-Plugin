@@ -40,6 +40,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
+    testImplementation("com.google.truth:truth:1.1.4")
 }
 
 java {

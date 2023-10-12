@@ -20,16 +20,14 @@
 
 package com.teamdev.jxbrowser.gradle
 
+import com.google.common.truth.Truth.assertThat
 import com.teamdev.jxbrowser.gradle.JxBrowserPlugin.Companion.EAP_REPOSITORY_URL
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.testfixtures.ProjectBuilder
-import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 class JxBrowserPluginTest {
 
@@ -47,8 +45,8 @@ class JxBrowserPluginTest {
     @Test
     fun `plugin extension is created properly`() {
         assertDoesNotThrow { project.extensions.getByName("jxbrowser") }
-        assertFalse(extension.includePreviewBuilds)
-        assertEquals(Repository.NORTH_AMERICA, extension.repository)
+        assertThat(extension.includePreviewBuilds).isFalse()
+        assertThat(extension.repository).isEqualTo(Repository.NORTH_AMERICA)
     }
 
     @Test
@@ -56,30 +54,32 @@ class JxBrowserPluginTest {
         val version = "1.0.0"
         extension.version = version
 
-        assertEquals("com.teamdev.jxbrowser:jxbrowser:$version", extension.core.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-javafx:$version", extension.javafx.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-swing:$version", extension.swing.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-swt:$version", extension.swt.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-win64:$version", extension.win64.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-win32:$version", extension.win32.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64:$version", extension.linux64.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-linux64-arm:$version", extension.linuxArm.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac:$version", extension.mac.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-mac-arm:$version", extension.macArm.get())
-        assertEquals("com.teamdev.jxbrowser:jxbrowser-cross-platform:$version", extension.crossPlatform.get())
+        assertThat(extension.core.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser:$version")
+        assertThat(extension.javafx.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-javafx:$version")
+        assertThat(extension.swing.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-swing:$version")
+        assertThat(extension.swt.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-swt:$version")
+        assertThat(extension.win64.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-win64:$version")
+        assertThat(extension.win32.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-win32:$version")
+        assertThat(extension.linux64.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-linux64:$version")
+        assertThat(extension.linuxArm.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-linux64-arm:$version")
+        assertThat(extension.mac.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-mac:$version")
+        assertThat(extension.macArm.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-mac-arm:$version")
+        assertThat(extension.crossPlatform.get()).isEqualTo("com.teamdev.jxbrowser:jxbrowser-cross-platform:$version")
     }
 
     @Test
     fun `maven repository is set correctly`() {
         val customRepository = "https://my.custom.repository"
         extension.repository = customRepository
-        assertTrue(mavenRepositories().contains(customRepository))
+        assertThat(mavenRepositoryUrls()).contains(customRepository)
 
         extension.includePreviewBuilds()
         project.evaluationDependsOn(":")
-        assertTrue(mavenRepositories().contains(EAP_REPOSITORY_URL))
+        assertThat(mavenRepositoryUrls()).contains(EAP_REPOSITORY_URL)
     }
 
-    private fun mavenRepositories() = project.repositories.filterIsInstance(MavenArtifactRepository::class.java)
-    private fun List<MavenArtifactRepository>.contains(url: String) = this.any { it.url.toString() == url }
+    private fun mavenRepositoryUrls() =
+        project.repositories
+            .filterIsInstance(MavenArtifactRepository::class.java)
+            .map { it.url.toString() }
 }

@@ -20,6 +20,7 @@
 
 package com.teamdev.jxbrowser.gradle
 
+import com.google.common.truth.Truth.assertThat
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.io.TempDir
@@ -27,8 +28,6 @@ import java.io.File
 import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class JxBrowserPluginFunctionalTest {
 
@@ -72,7 +71,7 @@ class JxBrowserPluginFunctionalTest {
             .withArguments("build")
             .build()
 
-        assertEquals(SUCCESS, result.task(":build")!!.outcome)
+        assertThat(result.task(":build")!!.outcome).isEqualTo(SUCCESS)
     }
 
     @Test
@@ -80,6 +79,18 @@ class JxBrowserPluginFunctionalTest {
     fun `JxBrowser jars are downloaded correctly`() {
         val version = "7.35.2"
         val taskName = "downloadJars"
+        val filesToCheck = listOf(
+            "jxbrowser-$version.jar",
+            "jxbrowser-javafx-$version.jar",
+            "jxbrowser-swing-$version.jar",
+            "jxbrowser-swt-$version.jar",
+            "jxbrowser-win64-$version.jar",
+            "jxbrowser-win32-$version.jar",
+            "jxbrowser-linux64-$version.jar",
+            "jxbrowser-linux64-arm-$version.jar",
+            "jxbrowser-mac-$version.jar",
+            "jxbrowser-mac-arm-$version.jar"
+        )
 
         buildFile.writeText(
             """ 
@@ -122,17 +133,8 @@ class JxBrowserPluginFunctionalTest {
             .withArguments(taskName)
             .build()
 
-        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
-        assertTrue(libsFolder.containsFile("jxbrowser-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-javafx-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-swing-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-swt-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-win64-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-win32-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-linux64-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-linux64-arm-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-mac-$version.jar"))
-        assertTrue(libsFolder.containsFile("jxbrowser-mac-arm-$version.jar"))
+        assertThat(result.task(":$taskName")!!.outcome).isEqualTo(SUCCESS)
+        assertThat(libsFolder.files()).containsExactlyElementsIn(filesToCheck)
     }
 
     @Test
@@ -140,6 +142,7 @@ class JxBrowserPluginFunctionalTest {
     fun `JxBrowser eap jar downloaded correctly`() {
         val eapVersion = "7.35.1-b56-eap"
         val taskName = "downloadJars"
+        val eapJar = "jxbrowser-$eapVersion.jar"
 
         buildFile.writeText(
             """ 
@@ -173,9 +176,9 @@ class JxBrowserPluginFunctionalTest {
             .withArguments(taskName)
             .build()
 
-        assertEquals(SUCCESS, result.task(":$taskName")!!.outcome)
-        assertTrue(libsFolder.containsFile("jxbrowser-$eapVersion.jar"))
+        assertThat(result.task(":$taskName")!!.outcome).isEqualTo(SUCCESS)
+        assertThat(libsFolder.files()).contains(eapJar)
     }
 
-    private fun File.containsFile(name: String) = this.listFiles()!!.any { it.name == name }
+    private fun File.files() = this.listFiles()!!.map { it.name }
 }
