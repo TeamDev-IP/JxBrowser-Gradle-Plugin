@@ -32,7 +32,7 @@ import kotlin.test.Test
 
 class JxBrowserPluginFunctionalTest {
 
-    private val version = System.getProperty("JXBROWSER_VERSION")
+    private val jxBrowserVersion = System.getProperty("JXBROWSER_VERSION")
 
     @TempDir
     lateinit var testProjectDir: File
@@ -57,7 +57,7 @@ class JxBrowserPluginFunctionalTest {
             }
             
             jxbrowser {
-                version = "$version"
+                version = "$jxBrowserVersion"
             }
             
             dependencies {
@@ -80,16 +80,16 @@ class JxBrowserPluginFunctionalTest {
     fun `JxBrowser jars are downloaded correctly`() {
         val taskName = "downloadJars"
         val filesToCheck = listOf(
-            "jxbrowser-$version.jar",
-            "jxbrowser-javafx-$version.jar",
-            "jxbrowser-swing-$version.jar",
-            "jxbrowser-swt-$version.jar",
-            "jxbrowser-win64-$version.jar",
-            "jxbrowser-win32-$version.jar",
-            "jxbrowser-linux64-$version.jar",
-            "jxbrowser-linux64-arm-$version.jar",
-            "jxbrowser-mac-$version.jar",
-            "jxbrowser-mac-arm-$version.jar"
+            "jxbrowser-$jxBrowserVersion.jar",
+            "jxbrowser-javafx-$jxBrowserVersion.jar",
+            "jxbrowser-swing-$jxBrowserVersion.jar",
+            "jxbrowser-swt-$jxBrowserVersion.jar",
+            "jxbrowser-win64-$jxBrowserVersion.jar",
+            "jxbrowser-win32-$jxBrowserVersion.jar",
+            "jxbrowser-linux64-$jxBrowserVersion.jar",
+            "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
+            "jxbrowser-mac-$jxBrowserVersion.jar",
+            "jxbrowser-mac-arm-$jxBrowserVersion.jar"
         )
 
         buildFile.writeText(
@@ -100,7 +100,7 @@ class JxBrowserPluginFunctionalTest {
             }
             
             jxbrowser {
-                version = "$version"
+                version = "$jxBrowserVersion"
             }
             
             configurations {
@@ -122,7 +122,7 @@ class JxBrowserPluginFunctionalTest {
             
             tasks.register<Copy>("$taskName") {
                 from(configurations.getByName("toCopy"))
-                into("libs")
+                into("$libsFolder")
             }
             """.trimIndent()
         )
