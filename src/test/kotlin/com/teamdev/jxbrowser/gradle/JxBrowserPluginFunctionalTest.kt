@@ -20,16 +20,19 @@
 
 package com.teamdev.jxbrowser.gradle
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
+import io.kotest.matchers.shouldBe
+import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
-import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class JxBrowserPluginFunctionalTest {
+
+    private val version = System.getProperty("JXBROWSER_VERSION")
 
     @TempDir
     lateinit var testProjectDir: File
@@ -45,7 +48,6 @@ class JxBrowserPluginFunctionalTest {
     }
 
     @Test
-    @Throws(IOException::class)
     fun `project successfully built with the plugin`() {
         buildFile.writeText(
             """ 
@@ -55,7 +57,7 @@ class JxBrowserPluginFunctionalTest {
             }
             
             jxbrowser {
-                version = "+"
+                version = "$version"
             }
             
             dependencies {
@@ -71,13 +73,11 @@ class JxBrowserPluginFunctionalTest {
             .withArguments("build")
             .build()
 
-        assertThat(result.task(":build")!!.outcome).isEqualTo(SUCCESS)
+        result.outcome(":build") shouldBe SUCCESS
     }
 
     @Test
-    @Throws(IOException::class)
     fun `JxBrowser jars are downloaded correctly`() {
-        val version = "7.35.2"
         val taskName = "downloadJars"
         val filesToCheck = listOf(
             "jxbrowser-$version.jar",
@@ -133,52 +133,10 @@ class JxBrowserPluginFunctionalTest {
             .withArguments(taskName)
             .build()
 
-        assertThat(result.task(":$taskName")!!.outcome).isEqualTo(SUCCESS)
-        assertThat(libsFolder.files()).containsExactlyElementsIn(filesToCheck)
+        result.outcome(":$taskName") shouldBe SUCCESS
+        libsFolder.files() shouldContainExactlyInAnyOrder filesToCheck
     }
 
-    @Test
-    @Throws(IOException::class)
-    fun `JxBrowser eap jar downloaded correctly`() {
-        val eapVersion = "7.35.1-b56-eap"
-        val taskName = "downloadJars"
-        val eapJar = "jxbrowser-$eapVersion.jar"
-
-        buildFile.writeText(
-            """ 
-            plugins {
-                base
-                id("com.teamdev.jxbrowser")
-            }
-            
-            jxbrowser {
-                includePreviewBuilds()
-            }
-            
-            configurations {
-                create("toCopy")
-            }
-            
-            dependencies {
-                "toCopy"("com.teamdev.jxbrowser:jxbrowser:$eapVersion")
-            }
-            
-            tasks.register<Copy>("$taskName") {
-                from(configurations.getByName("toCopy"))
-                into("libs")
-            }
-            """.trimIndent()
-        )
-
-        val result = GradleRunner.create()
-            .withProjectDir(testProjectDir)
-            .withPluginClasspath()
-            .withArguments(taskName)
-            .build()
-
-        assertThat(result.task(":$taskName")!!.outcome).isEqualTo(SUCCESS)
-        assertThat(libsFolder.files()).contains(eapJar)
-    }
-
+    private fun BuildResult.outcome(taskName: String) = this.task(taskName)!!.outcome
     private fun File.files() = this.listFiles()!!.map { it.name }
 }

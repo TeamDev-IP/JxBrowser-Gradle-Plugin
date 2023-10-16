@@ -18,6 +18,7 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import org.gradle.api.JavaVersion.toVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -28,8 +29,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
 }
 
-group = property("GROUP")
-version = property("VERSION")
+group = projectProperty("GROUP")
+version = projectProperty("VERSION")
 
 repositories {
     mavenCentral()
@@ -40,26 +41,26 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
-    testImplementation("com.google.truth:truth:1.1.4")
+    testImplementation("io.kotest:kotest-assertions-core:5.7.2")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = toVersion(projectProperty("JAVA_VERSION"))
+    targetCompatibility = toVersion(projectProperty("JAVA_VERSION"))
 }
 
 gradlePlugin {
     plugins {
-        create(property("NAME")) {
-            id = property("ID")
-            displayName = property("DISPLAY_NAME")
-            description = property("DESCRIPTION")
-            implementationClass = property("IMPLEMENTATION_CLASS")
+        create(projectProperty("NAME")) {
+            id = projectProperty("ID")
+            displayName = projectProperty("DISPLAY_NAME")
+            description = projectProperty("DESCRIPTION")
+            implementationClass = projectProperty("IMPLEMENTATION_CLASS")
             tags = listOf("jxbrowser")
         }
     }
-    website = property("WEBSITE")
-    vcsUrl = property("VCS_URL")
+    website = projectProperty("WEBSITE")
+    vcsUrl = projectProperty("VCS_URL")
 }
 
 // Used only for testing.
@@ -74,12 +75,13 @@ publishing {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = projectProperty("JAVA_VERSION")
     }
 }
 
-tasks.test {
+tasks.withType<Test> {
     useJUnitPlatform()
+    systemProperty("JXBROWSER_VERSION", projectProperty("JXBROWSER_VERSION"))
 }
 
-fun property(name: String) = project.property(name).toString()
+fun projectProperty(name: String) = project.property(name).toString()

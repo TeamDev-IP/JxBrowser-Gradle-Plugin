@@ -30,29 +30,11 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 
 /**
- * A plugin that configures JxBrowser repository and helps with dependencies.
+ * A Gradle plugin extension used for configuring and managing
+ * JxBrowser dependencies within your Gradle project.
  *
- * Usage example:
- *
- * ```kotlin
- * dependencies {
- *     implementation(jxbrowser.swing)
- *     implementation(jxbrowser.currentPlatform)
- * }
- *
- * jxbrowser {
- *     version = "7.35.2"
- *
- *     // Use JxBrowser repository at specific location. It's North America by default.
- *     repository = Repository.NORTH_AMERICA
- *
- *     // Or use your custom repository.
- *     // repository = "https://my.custom.repository"
- *
- *     // Include JxBrowser EAP repository.
- *     includePreviewBuilds()
- * }
- * ```
+ * It provides options for specifying the JxBrowser version, repository location,
+ * and various JxBrowser dependencies based on your project's needs.
  */
 open class JxBrowserExtension(private val project: Project) {
 
