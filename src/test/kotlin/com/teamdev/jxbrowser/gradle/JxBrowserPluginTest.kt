@@ -42,6 +42,7 @@ class JxBrowserPluginTest {
         project = ProjectBuilder.builder().build()
         project.pluginManager.apply(pluginId)
         extension = project.extensions.getByType(JxBrowserExtension::class.java)
+        extension.version = jxBrowserVersion
     }
 
     @Test
@@ -54,7 +55,6 @@ class JxBrowserPluginTest {
     @Test
     fun `dependency notations are resolved properly`() {
         with(extension) {
-            extension.version = jxBrowserVersion
             val group = "com.teamdev.jxbrowser"
 
             swt.get() shouldBe "$group:jxbrowser-swt:$jxBrowserVersion"
