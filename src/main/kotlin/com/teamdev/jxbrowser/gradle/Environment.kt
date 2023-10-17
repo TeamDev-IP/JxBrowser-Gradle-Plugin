@@ -59,7 +59,13 @@ internal object Environment {
      */
     fun isArm() = jvmArch() in ARCH_ARM
 
-    private fun osName() = System.getProperty("os.name")
+    /**
+     * Returns the name of the current operating system.
+     */
+    fun osName() = System.getProperty("os.name")
 
-    private fun jvmArch() = System.getProperty("os.arch")
+    /**
+     * Returns the architecture of the current operating system.
+     */
+    fun jvmArch() = System.getProperty("os.arch")
 }

@@ -43,12 +43,12 @@ import org.gradle.api.Project
  *     // Or use your custom repository.
  *     // repository = "https://my.custom.repository"
  *
- *     // Include JxBrowser EAP repository.
+ *     // Add a repository with JxBrowser preview builds.
  *     includePreviewBuilds()
  * }
  * ```
  */
-class JxBrowserPlugin : Plugin<Project> {
+public class JxBrowserPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create(EXTENSION_NAME, JxBrowserExtension::class.java, project)
@@ -63,8 +63,8 @@ class JxBrowserPlugin : Plugin<Project> {
 
     private fun Project.addMavenRepositoryLocation(url: Any) = this.repositories.maven { it.setUrl(url) }
 
-    companion object {
-        const val EXTENSION_NAME = "jxbrowser"
-        const val EAP_REPOSITORY_URL = "https://europe-maven.pkg.dev/jxbrowser/eaps"
+    private companion object {
+        private const val EXTENSION_NAME: String = "jxbrowser"
+        private const val EAP_REPOSITORY_URL: String = "https://europe-maven.pkg.dev/jxbrowser/eaps"
     }
 }

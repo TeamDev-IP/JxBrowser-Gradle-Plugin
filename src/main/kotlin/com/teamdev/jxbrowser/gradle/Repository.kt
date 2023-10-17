@@ -23,15 +23,15 @@ package com.teamdev.jxbrowser.gradle
 /**
  * Available JxBrowser repositories.
  */
-object Repository {
+public object Repository {
 
     /**
      * A repository located in North America.
      */
-    const val NORTH_AMERICA = "https://us-maven.pkg.dev/jxbrowser/releases"
+    public const val NORTH_AMERICA: String = "https://us-maven.pkg.dev/jxbrowser/releases"
 
     /**
      * A repository located in Europe.
      */
-    const val EUROPE = "https://europe-maven.pkg.dev/jxbrowser/releases"
+    public const val EUROPE: String = "https://europe-maven.pkg.dev/jxbrowser/releases"
 }

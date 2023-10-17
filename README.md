@@ -11,7 +11,7 @@ plugins {
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
-    version = "7.35.2"
+    version = "7.36"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
     // By default, it's North America.
@@ -20,7 +20,7 @@ jxbrowser {
     // Alternatively, it may point to a custom repo via its URL, as follows:
     // repository = "https://my.custom.repository"
 
-    // Adds JxBrowser EAP repository to the project.
+    // Adds a repository with JxBrowser preview builds to the project.
     includePreviewBuilds()
 }
 

@@ -18,8 +18,26 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.gradle.api.JavaVersion.toVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+object BuildSettings {
+    const val GROUP = "com.teamdev.jxbrowser"
+    const val VERSION = "1.0.0"
+    const val JXBROWSER_VERSION = "7.36"
+    val javaVersion = JavaVersion.VERSION_1_8
+}
+
+object PluginProperties {
+    const val ID = "com.teamdev.jxbrowser"
+    const val NAME = "jxbrowser-deps"
+    const val DISPLAY_NAME = "Adds JxBrowser repository and dependencies to the project"
+    const val WEBSITE = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
+    const val VCS_URL = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
+    const val IMPLEMENTATION_CLASS = "com.teamdev.jxbrowser.gradle.JxBrowserPlugin"
+    const val DESCRIPTION =
+        "Adds JxBrowser repository to the project and provides convenience methods for applying JxBrowser dependencies."
+    val TAGS = listOf("jxbrowser")
+}
 
 plugins {
     `java-gradle-plugin`
@@ -29,8 +47,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
 }
 
-group = projectProperty("GROUP")
-version = projectProperty("VERSION")
+group = BuildSettings.GROUP
+version = BuildSettings.VERSION
 
 repositories {
     mavenCentral()
@@ -45,26 +63,30 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = toVersion(projectProperty("JAVA_VERSION"))
-    targetCompatibility = toVersion(projectProperty("JAVA_VERSION"))
+    sourceCompatibility = BuildSettings.javaVersion
+    targetCompatibility = BuildSettings.javaVersion
+}
+
+kotlin {
+    explicitApi()
 }
 
 gradlePlugin {
     plugins {
-        create(projectProperty("NAME")) {
-            id = projectProperty("ID")
-            displayName = projectProperty("DISPLAY_NAME")
-            description = projectProperty("DESCRIPTION")
-            implementationClass = projectProperty("IMPLEMENTATION_CLASS")
-            tags = listOf("jxbrowser")
+        create(PluginProperties.NAME) {
+            id = PluginProperties.ID
+            displayName = PluginProperties.DISPLAY_NAME
+            description = PluginProperties.DESCRIPTION
+            implementationClass = PluginProperties.IMPLEMENTATION_CLASS
+            tags = PluginProperties.TAGS
         }
     }
-    website = projectProperty("WEBSITE")
-    vcsUrl = projectProperty("VCS_URL")
+    website = PluginProperties.WEBSITE
+    vcsUrl = PluginProperties.VCS_URL
 }
 
-// Used only for testing.
 publishing {
+    description = "Publishes the plugin to the local repository. Used for testing only."
     repositories {
         maven {
             name = "localPluginRepository"
@@ -74,14 +96,10 @@ publishing {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = projectProperty("JAVA_VERSION")
-    }
+    kotlinOptions.jvmTarget = BuildSettings.javaVersion.toString()
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    systemProperty("JXBROWSER_VERSION", projectProperty("JXBROWSER_VERSION"))
+    systemProperty("JXBROWSER_VERSION", BuildSettings.JXBROWSER_VERSION)
 }
-
-fun projectProperty(name: String) = project.property(name).toString()

@@ -20,17 +20,18 @@
 
 package com.teamdev.jxbrowser.gradle
 
-import com.teamdev.jxbrowser.gradle.JxBrowserPlugin.Companion.EAP_REPOSITORY_URL
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
+import org.junit.jupiter.api.DisplayName
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class JxBrowserPluginTest {
+@DisplayName("JxBrowserPlugin should")
+internal class JxBrowserPluginTest {
 
     private val jxBrowserVersion = System.getProperty("JXBROWSER_VERSION")
     private val pluginId = "com.teamdev.jxbrowser"
@@ -46,14 +47,14 @@ class JxBrowserPluginTest {
     }
 
     @Test
-    fun `plugin extension is created properly`() {
+    fun `create the extension`() {
         assertDoesNotThrow { project.extensions.getByName("jxbrowser") }
         extension.includePreviewBuilds shouldBe false
         extension.repository shouldBe Repository.NORTH_AMERICA
     }
 
     @Test
-    fun `dependency notations are resolved properly`() {
+    fun `resolve dependencies`() {
         with(extension) {
             val group = "com.teamdev.jxbrowser"
 
@@ -72,14 +73,15 @@ class JxBrowserPluginTest {
     }
 
     @Test
-    fun `maven repository is set correctly`() {
+    fun `set the maven repository`() {
         val customRepository = "https://my.custom.repository"
         extension.repository = customRepository
         mavenRepositoryUrls() shouldContain customRepository
 
+        val eapRepository = "https://europe-maven.pkg.dev/jxbrowser/eaps"
         extension.includePreviewBuilds()
         project.evaluationDependsOn(":")
-        mavenRepositoryUrls() shouldContain EAP_REPOSITORY_URL
+        mavenRepositoryUrls() shouldContain eapRepository
     }
 
     private fun mavenRepositoryUrls() =

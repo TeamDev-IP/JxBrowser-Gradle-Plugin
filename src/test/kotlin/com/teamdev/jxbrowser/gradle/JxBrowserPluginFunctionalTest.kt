@@ -25,12 +25,14 @@ import io.kotest.matchers.shouldBe
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class JxBrowserPluginFunctionalTest {
+@DisplayName("JxBrowserPlugin should")
+internal class JxBrowserPluginFunctionalTest {
 
     private val jxBrowserVersion = System.getProperty("JXBROWSER_VERSION")
 
@@ -48,7 +50,7 @@ class JxBrowserPluginFunctionalTest {
     }
 
     @Test
-    fun `project successfully built with the plugin`() {
+    fun `built with the project`() {
         buildFile.writeText(
             """ 
             plugins {
@@ -77,7 +79,7 @@ class JxBrowserPluginFunctionalTest {
     }
 
     @Test
-    fun `JxBrowser jars are downloaded correctly`() {
+    fun `download JxBrowser jars`() {
         val taskName = "downloadJars"
         val filesToCheck = listOf(
             "jxbrowser-$jxBrowserVersion.jar",
