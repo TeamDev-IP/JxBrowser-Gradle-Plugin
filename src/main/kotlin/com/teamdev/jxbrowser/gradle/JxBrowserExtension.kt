@@ -149,7 +149,7 @@ public open class JxBrowserExtension(private val project: Project) {
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: run {
                 val currentPlatform = "${osName()} ${jvmArch()}"
-                val errorMessage = "The current '$currentPlatform' platform is not supported by JxBrowser $version."
+                val errorMessage = "The current $currentPlatform platform is not supported by JxBrowser $version."
                 throw IllegalStateException(errorMessage)
             }
     }
