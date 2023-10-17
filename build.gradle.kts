@@ -63,8 +63,10 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = BuildSettings.javaVersion
-    targetCompatibility = BuildSettings.javaVersion
+    with(BuildSettings) {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+    }
 }
 
 kotlin {
@@ -72,17 +74,19 @@ kotlin {
 }
 
 gradlePlugin {
-    plugins {
-        create(PluginProperties.NAME) {
-            id = PluginProperties.ID
-            displayName = PluginProperties.DISPLAY_NAME
-            description = PluginProperties.DESCRIPTION
-            implementationClass = PluginProperties.IMPLEMENTATION_CLASS
-            tags = PluginProperties.TAGS
+    with(PluginProperties) {
+        plugins {
+            create(NAME) {
+                id = ID
+                displayName = DISPLAY_NAME
+                description = DESCRIPTION
+                implementationClass = IMPLEMENTATION_CLASS
+                tags = TAGS
+            }
         }
+        website = WEBSITE
+        vcsUrl = VCS_URL
     }
-    website = PluginProperties.WEBSITE
-    vcsUrl = PluginProperties.VCS_URL
 }
 
 publishing {
