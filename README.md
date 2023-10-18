@@ -15,7 +15,7 @@ jxbrowser {
     version = "7.36"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
-    // By default, it's North America.
+    // If not specified, the location is set to North America.
     repository = Repository.NORTH_AMERICA
 
     // Alternatively, it may point to a custom repo via its URL, as follows:
@@ -37,10 +37,10 @@ dependencies {
     // Detects the current platform and adds the corresponding Chromium binaries.
     implementation(jxbrowser.currentPlatform)
 
-    // Adds dependencies with binaries for all supported platforms.
+    // Adds dependencies to the Chromium binaries for all supported platforms.
     implementation(jxbrowser.crossPlatform)
 
-    // Adds a dependency to specific Chromium binaries.
+    // Adds a dependency to the platform-specific Chromium binaries.
     implementation(jxbrowser.mac)
     implementation(jxbrowser.macArm)
     implementation(jxbrowser.win32)

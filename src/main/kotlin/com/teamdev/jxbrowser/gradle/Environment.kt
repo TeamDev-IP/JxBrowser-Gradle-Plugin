@@ -65,7 +65,7 @@ internal object Environment {
     fun osName() = System.getProperty("os.name")
 
     /**
-     * Returns the architecture of the current operating system.
+     * Returns the current JVM architecture.
      */
     fun jvmArch() = System.getProperty("os.arch")
 }

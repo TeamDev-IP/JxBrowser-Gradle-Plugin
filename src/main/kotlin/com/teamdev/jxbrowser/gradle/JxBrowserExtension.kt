@@ -59,7 +59,7 @@ public open class JxBrowserExtension(private val project: Project) {
     public var includePreviewBuilds: Boolean = false
 
     /**
-     * Adds a JxBrowser EAP repository to the project.
+     * Adds a repository with JxBrowser preview builds to the project.
      */
     public fun includePreviewBuilds() {
         includePreviewBuilds = true
@@ -91,37 +91,37 @@ public open class JxBrowserExtension(private val project: Project) {
 
     /**
      * Returns a dependency notation for the `jxbrowser-win64`,
-     * an artifact with Windows 64-bit binaries.
+     * an artifact with Chromium Windows 64-bit binaries.
      */
     public val win64: Provider<String> = artifact("win64")
 
     /**
      * Returns a dependency notation for the `jxbrowser-win32`,
-     * an artifact with Windows 32-bit binaries.
+     * an artifact with Chromium Windows 32-bit binaries.
      */
     public val win32: Provider<String> = artifact("win32")
 
     /**
      * Returns a dependency notation for the `jxbrowser-linux64`,
-     * an artifact with Linux 64-bit binaries.
+     * an artifact with Chromium Linux 64-bit binaries.
      */
     public val linux64: Provider<String> = artifact("linux64")
 
     /**
      * Returns a dependency notation for the `jxbrowser-linux64-arm`,
-     * an artifact with Linux 64-bit ARM binaries.
+     * an artifact with Chromium Linux 64-bit ARM binaries.
      */
     public val linuxArm: Provider<String> = artifact("linux64-arm")
 
     /**
      * Returns a dependency notation for the `jxbrowser-mac`,
-     * an artifact with macOS binaries.
+     * an artifact with Chromium macOS (Intel) binaries.
      */
     public val mac: Provider<String> = artifact("mac")
 
     /**
      * Returns a dependency notation for the `jxbrowser-mac-arm`,
-     * an artifact with macOS ARM binaries.
+     * an artifact with Chromium macOS ARM (Apple Silicon) binaries.
      */
     public val macArm: Provider<String> = artifact("mac-arm")
 
@@ -147,7 +147,7 @@ public open class JxBrowserExtension(private val project: Project) {
             Pair({ isArm() && isMac() }, macArm)
         )
         return platformMap.entries.firstOrNull { it.key() }?.value
-            ?: run {
+            ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"
                 val errorMessage = "The current $currentPlatform platform is not supported by JxBrowser $version."
                 throw IllegalStateException(errorMessage)
