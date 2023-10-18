@@ -18,20 +18,20 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.teamdev.jxbrowser.gradle;
+package com.teamdev.jxbrowser.gradle
 
 /**
  * Available JxBrowser repositories.
  */
-public final class Repository {
+public object Repository {
 
     /**
      * A repository located in North America.
      */
-    public static final String NORTH_AMERICA = "https://us-maven.pkg.dev/jxbrowser/releases";
+    public const val NORTH_AMERICA: String = "https://us-maven.pkg.dev/jxbrowser/releases"
 
     /**
      * A repository located in Europe.
      */
-    public static final String EUROPE = "https://europe-maven.pkg.dev/jxbrowser/releases";
+    public const val EUROPE: String = "https://europe-maven.pkg.dev/jxbrowser/releases"
 }

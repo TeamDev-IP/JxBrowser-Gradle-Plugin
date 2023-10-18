@@ -18,38 +18,92 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-plugins {
-    `java-gradle-plugin`
-    id("maven-publish")
-    id("com.gradle.plugin-publish") version "1.2.1"
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+object BuildSettings {
+    const val GROUP = "com.teamdev.jxbrowser"
+    const val VERSION = "1.0.0"
+    const val JXBROWSER_VERSION = "7.36"
+    val javaVersion = JavaVersion.VERSION_1_8
 }
 
-group = "com.teamdev.jxbrowser"
-version = "0.0.5"
+object PluginProperties {
+    const val ID = "com.teamdev.jxbrowser"
+    const val NAME = "jxbrowser-deps"
+    const val DISPLAY_NAME = "Adds JxBrowser repository and dependencies to the project"
+    const val WEBSITE = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
+    const val VCS_URL = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
+    const val IMPLEMENTATION_CLASS = "com.teamdev.jxbrowser.gradle.JxBrowserPlugin"
+    const val DESCRIPTION =
+        "Adds JxBrowser repository to the project and provides convenience methods for applying JxBrowser dependencies."
+    val TAGS = listOf("jxbrowser")
+}
 
-gradlePlugin {
-    plugins {
-        website = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
-        vcsUrl = "https://github.com/TeamDev-IP/JxBrowser-Gradle-Plugin"
-        create("jxbrowser-deps") {
-            id = "com.teamdev.jxbrowser"
-            displayName = "Adds JxBrowser repository and dependencies to the project"
-            description = """
-                This plug-in adds JxBrowser repository to the project and provides convenience methods for applying
-                JxBrowser dependencies.
-            """.trimIndent()
-            implementationClass = "com.teamdev.jxbrowser.gradle.DepsPlugin"
-            tags = listOf("jxbrowser")
-        }
+plugins {
+    `java-gradle-plugin`
+    kotlin("jvm") version "1.9.10"
+    id("maven-publish")
+    id("com.gradle.plugin-publish") version "1.2.1"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+}
+
+group = BuildSettings.GROUP
+version = BuildSettings.VERSION
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
+
+    testImplementation(kotlin("test"))
+    testImplementation(gradleTestKit())
+    testImplementation("io.kotest:kotest-assertions-core:5.7.2")
+}
+
+java {
+    with(BuildSettings) {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
     }
 }
 
-// Used only for testing.
+kotlin {
+    explicitApi()
+}
+
+gradlePlugin {
+    with(PluginProperties) {
+        plugins {
+            create(NAME) {
+                id = ID
+                displayName = DISPLAY_NAME
+                description = DESCRIPTION
+                implementationClass = IMPLEMENTATION_CLASS
+                tags = TAGS
+            }
+        }
+        website = WEBSITE
+        vcsUrl = VCS_URL
+    }
+}
+
 publishing {
+    description = "Publishes the plugin to the local repository. Used for testing only."
     repositories {
         maven {
             name = "localPluginRepository"
             url = uri("../local-plugin-repository")
         }
     }
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = BuildSettings.javaVersion.toString()
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    systemProperty("JXBROWSER_VERSION", BuildSettings.JXBROWSER_VERSION)
 }

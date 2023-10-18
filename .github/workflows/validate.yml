@@ -1,0 +1,27 @@
+name: Validate Plugin
+
+on:
+  push:
+
+jobs:
+  ktlint:
+    name: Ktlint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run ktlint check
+        run: ./gradlew ktlintCheck
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: ./gradlew test

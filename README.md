@@ -11,41 +11,42 @@ plugins {
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
-    version = "7.35.2"
+    // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
+    version = "7.36"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
-    // By default, it's North America.
+    // If not specified, the location is set to North America.
     repository = Repository.NORTH_AMERICA
 
     // Alternatively, it may point to a custom repo via its URL, as follows:
     // repository = "https://my.custom.repository"
 
-    // Adds JxBrowser EAP repository to the project.
+    // Adds a repository with JxBrowser preview builds to the project.
     includePreviewBuilds()
 }
 
 dependencies {
     // Adds a dependency to the core JxBrowser API.
-    implementation(jxbrowser.core())
+    implementation(jxbrowser.core)
 
     // Adds dependencies to the UI toolkit integrations.
-    implementation(jxbrowser.swt())
-    implementation(jxbrowser.swing())
-    implementation(jxbrowser.javafx())
+    implementation(jxbrowser.swt)
+    implementation(jxbrowser.swing)
+    implementation(jxbrowser.javafx)
 
     // Detects the current platform and adds the corresponding Chromium binaries.
-    implementation(jxbrowser.currentPlatform())
+    implementation(jxbrowser.currentPlatform)
 
-    // Adds dependencies with binaries for all supported platforms.
-    implementation(jxbrowser.crossPlatform())
+    // Adds dependencies to the Chromium binaries for all supported platforms.
+    implementation(jxbrowser.crossPlatform)
 
-    // Adds a dependency to specific Chromium binaries.
-    implementation(jxbrowser.mac())
-    implementation(jxbrowser.macArm())
-    implementation(jxbrowser.win32())
-    implementation(jxbrowser.win64())
-    implementation(jxbrowser.linux64())
-    implementation(jxbrowser.linuxArm())
+    // Adds a dependency to the platform-specific Chromium binaries.
+    implementation(jxbrowser.mac)
+    implementation(jxbrowser.macArm)
+    implementation(jxbrowser.win32)
+    implementation(jxbrowser.win64)
+    implementation(jxbrowser.linux64)
+    implementation(jxbrowser.linuxArm)
 }
 ```
 
