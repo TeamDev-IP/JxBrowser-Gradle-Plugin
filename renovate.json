@@ -2,5 +2,9 @@
   "extends": [
     "config:base",
     ":automergeMinor"
+  ],
+  "reviewers": [
+    "Danil-Didkovskiy",
+    "vladimir-ikryanov"
   ]
 }
