@@ -69,7 +69,7 @@ public open class JxBrowserExtension(private val project: Project) {
      * Returns a dependency notation for the `jxbrowser`,
      * an artifact with the core API of the library.
      */
-    public val core: Provider<String> = project.providers.provider { "$GROUP:jxbrowser:$version" }
+    public val core: Provider<String> = artifact("core")
 
     /**
      * Returns a dependency notation for the `jxbrowser-javafx`,
@@ -154,7 +154,14 @@ public open class JxBrowserExtension(private val project: Project) {
             }
     }
 
-    private fun artifact(shortName: String) = project.providers.provider { "$GROUP:jxbrowser-$shortName:$version" }
+    private fun artifact(shortName: String) = project.providers.provider {
+        check(version.isNotBlank()) { "JxBrowser version is not specified." }
+        if (shortName == "core") {
+            "$GROUP:jxbrowser:$version"
+        } else {
+            "$GROUP:jxbrowser-$shortName:$version"
+        }
+    }
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"
