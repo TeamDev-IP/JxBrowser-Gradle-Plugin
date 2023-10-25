@@ -55,7 +55,6 @@ public class JxBrowserPlugin : Plugin<Project> {
         val extension = project.extensions.create(EXTENSION_NAME, JxBrowserExtension::class.java, project)
         project.addMavenRepositoryLocation(project.providers.provider { extension.repository })
         project.afterEvaluate {
-            check(extension.version.isNotBlank()) { "JxBrowser version is not specified." }
             if (extension.includePreviewBuilds) {
                 project.addMavenRepositoryLocation(EAP_REPOSITORY_URL)
             }
