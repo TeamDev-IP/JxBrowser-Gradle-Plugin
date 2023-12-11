@@ -32,7 +32,6 @@ import kotlin.test.Test
 
 @DisplayName("JxBrowserPlugin should")
 internal class JxBrowserPluginTest {
-
     private val jxBrowserVersion = System.getProperty("JXBROWSER_VERSION")
     private val pluginId = "com.teamdev.jxbrowser"
     private lateinit var project: Project

@@ -24,7 +24,6 @@ package com.teamdev.jxbrowser.gradle
  * Provides the details about the current operating system and JVM architecture.
  */
 internal object Environment {
-
     private val ARCH_X64 = setOf("amd64", "x86_64")
     private val ARCH_X86 = setOf("x86", "i386")
     private val ARCH_ARM = setOf("aarch64", "arm")

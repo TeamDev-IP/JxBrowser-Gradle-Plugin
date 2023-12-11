@@ -50,7 +50,6 @@ import org.gradle.api.Project
  * ```
  */
 public class JxBrowserPlugin : Plugin<Project> {
-
     override fun apply(project: Project) {
         val extension = project.extensions.create(EXTENSION_NAME, JxBrowserExtension::class.java, project)
         project.addMavenRepositoryLocation(project.providers.provider { extension.repository })

@@ -39,7 +39,6 @@ import org.gradle.api.provider.Provider
  * and various JxBrowser dependencies based on your project's needs.
  */
 public open class JxBrowserExtension(private val project: Project) {
-
     /**
      * A version of the JxBrowser.
      *
@@ -138,14 +137,15 @@ public open class JxBrowserExtension(private val project: Project) {
     public val currentPlatform: Provider<String> = currentPlatform()
 
     private fun currentPlatform(): Provider<String> {
-        val platformMap = mapOf(
-            Pair({ isX64Bit() && isWindows() }, win64),
-            Pair({ isX64Bit() && isLinux() }, linux64),
-            Pair({ isX64Bit() && isMac() }, mac),
-            Pair({ is32Bit() && isWindows() }, win32),
-            Pair({ isArm() && isLinux() }, linuxArm),
-            Pair({ isArm() && isMac() }, macArm)
-        )
+        val platformMap =
+            mapOf(
+                Pair({ isX64Bit() && isWindows() }, win64),
+                Pair({ isX64Bit() && isLinux() }, linux64),
+                Pair({ isX64Bit() && isMac() }, mac),
+                Pair({ is32Bit() && isWindows() }, win32),
+                Pair({ isArm() && isLinux() }, linuxArm),
+                Pair({ isArm() && isMac() }, macArm),
+            )
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"
@@ -154,14 +154,15 @@ public open class JxBrowserExtension(private val project: Project) {
             }
     }
 
-    private fun artifact(shortName: String) = project.providers.provider {
-        check(version.isNotBlank()) { "JxBrowser version is not specified." }
-        if (shortName == "core") {
-            "$GROUP:jxbrowser:$version"
-        } else {
-            "$GROUP:jxbrowser-$shortName:$version"
+    private fun artifact(shortName: String) =
+        project.providers.provider {
+            check(version.isNotBlank()) { "JxBrowser version is not specified." }
+            if (shortName == "core") {
+                "$GROUP:jxbrowser:$version"
+            } else {
+                "$GROUP:jxbrowser-$shortName:$version"
+            }
         }
-    }
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"

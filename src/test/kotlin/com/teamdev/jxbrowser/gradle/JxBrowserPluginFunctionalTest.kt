@@ -33,7 +33,6 @@ import kotlin.test.Test
 
 @DisplayName("JxBrowserPlugin should")
 internal class JxBrowserPluginFunctionalTest {
-
     private val jxBrowserVersion = System.getProperty("JXBROWSER_VERSION")
 
     @TempDir
@@ -66,14 +65,15 @@ internal class JxBrowserPluginFunctionalTest {
                 implementation(jxbrowser.core)
                 implementation(jxbrowser.currentPlatform)
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
 
-        val result = GradleRunner.create()
-            .withProjectDir(testProjectDir)
-            .withPluginClasspath()
-            .withArguments("build")
-            .build()
+        val result =
+            GradleRunner.create()
+                .withProjectDir(testProjectDir)
+                .withPluginClasspath()
+                .withArguments("build")
+                .build()
 
         result.outcome(":build") shouldBe SUCCESS
     }
@@ -81,18 +81,19 @@ internal class JxBrowserPluginFunctionalTest {
     @Test
     fun `download JxBrowser jars`() {
         val taskName = "downloadJars"
-        val filesToCheck = listOf(
-            "jxbrowser-$jxBrowserVersion.jar",
-            "jxbrowser-javafx-$jxBrowserVersion.jar",
-            "jxbrowser-swing-$jxBrowserVersion.jar",
-            "jxbrowser-swt-$jxBrowserVersion.jar",
-            "jxbrowser-win64-$jxBrowserVersion.jar",
-            "jxbrowser-win32-$jxBrowserVersion.jar",
-            "jxbrowser-linux64-$jxBrowserVersion.jar",
-            "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
-            "jxbrowser-mac-$jxBrowserVersion.jar",
-            "jxbrowser-mac-arm-$jxBrowserVersion.jar"
-        )
+        val filesToCheck =
+            listOf(
+                "jxbrowser-$jxBrowserVersion.jar",
+                "jxbrowser-javafx-$jxBrowserVersion.jar",
+                "jxbrowser-swing-$jxBrowserVersion.jar",
+                "jxbrowser-swt-$jxBrowserVersion.jar",
+                "jxbrowser-win64-$jxBrowserVersion.jar",
+                "jxbrowser-win32-$jxBrowserVersion.jar",
+                "jxbrowser-linux64-$jxBrowserVersion.jar",
+                "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
+                "jxbrowser-mac-$jxBrowserVersion.jar",
+                "jxbrowser-mac-arm-$jxBrowserVersion.jar",
+            )
 
         buildFile.writeText(
             """ 
@@ -126,19 +127,21 @@ internal class JxBrowserPluginFunctionalTest {
                 from(configurations.getByName("toCopy"))
                 into("$libsFolder")
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
 
-        val result = GradleRunner.create()
-            .withProjectDir(testProjectDir)
-            .withPluginClasspath()
-            .withArguments(taskName)
-            .build()
+        val result =
+            GradleRunner.create()
+                .withProjectDir(testProjectDir)
+                .withPluginClasspath()
+                .withArguments(taskName)
+                .build()
 
         result.outcome(":$taskName") shouldBe SUCCESS
         libsFolder.files() shouldContainExactlyInAnyOrder filesToCheck
     }
 
     private fun BuildResult.outcome(taskName: String) = this.task(taskName)!!.outcome
+
     private fun File.files() = this.listFiles()!!.map { it.name }
 }

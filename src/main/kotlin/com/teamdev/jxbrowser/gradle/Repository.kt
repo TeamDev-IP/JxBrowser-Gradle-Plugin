@@ -24,7 +24,6 @@ package com.teamdev.jxbrowser.gradle
  * Available JxBrowser repositories.
  */
 public object Repository {
-
     /**
      * A repository located in North America.
      */
