@@ -44,7 +44,7 @@ plugins {
     kotlin("jvm") version "1.9.22"
     id("maven-publish")
     id("com.gradle.plugin-publish") version "1.2.1"
-    id("org.jlleitschuh.gradle.ktlint") version "12.0.3"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
 group = BuildSettings.GROUP
