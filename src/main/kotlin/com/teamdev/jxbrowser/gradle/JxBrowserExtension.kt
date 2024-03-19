@@ -71,6 +71,18 @@ public open class JxBrowserExtension(private val project: Project) {
     public val core: Provider<String> = artifact("core")
 
     /**
+     * Returns a dependency notation for the `jxbrowser-kotlin`,
+     * an artifact with the Kotlin API of the library.
+     */
+    public val kotlin: Provider<String> = artifact("kotlin")
+
+    /**
+     * Returns a dependency notation for the `jxbrowser-compose`,
+     * an artifact with Compose integration.
+     */
+    public val compose: Provider<String> = artifact("compose")
+
+    /**
      * Returns a dependency notation for the `jxbrowser-javafx`,
      * an artifact with JavaFX integration.
      */
