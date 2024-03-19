@@ -6,13 +6,13 @@ A Gradle plug-in that provides convenience methods for adding JxBrowser dependen
 
 ```kotlin
 plugins {
-    id("com.teamdev.jxbrowser") version "1.0.1"
+    id("com.teamdev.jxbrowser") version "1.0.2"
 }
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
-    version = "7.36"
+    version = "7.38.0"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
     // If not specified, the location is set to North America.

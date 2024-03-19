@@ -125,7 +125,60 @@ internal class JxBrowserPluginFunctionalTest {
             
             tasks.register<Copy>("$taskName") {
                 from(configurations.getByName("toCopy"))
-                into("$libsFolder")
+                into("${libsFolder.toString().replace("\\", "/")}")
+            }
+            """.trimIndent(),
+        )
+
+        val result =
+            GradleRunner.create()
+                .withProjectDir(testProjectDir)
+                .withPluginClasspath()
+                .withArguments(taskName)
+                .build()
+
+        result.outcome(":$taskName") shouldBe SUCCESS
+        libsFolder.files() shouldContainExactlyInAnyOrder filesToCheck
+    }
+
+    @Test
+    fun `download JxBrowser 8 jars`() {
+        val taskName = "downloadJars"
+        val jxBrowserVersion = "8.0.0-eap.1"
+        val filesToCheck =
+            listOf(
+                "jxbrowser-$jxBrowserVersion.jar",
+                "jxbrowser-kotlin-$jxBrowserVersion.jar",
+                "jxbrowser-compose-$jxBrowserVersion.jar",
+                "jxbrowser-swing-$jxBrowserVersion.jar",
+            )
+
+        buildFile.writeText(
+            """ 
+            plugins {
+                base
+                id("com.teamdev.jxbrowser")
+            }
+            
+            jxbrowser {
+                version = "$jxBrowserVersion"
+                includePreviewBuilds()
+            }
+            
+            configurations {
+                create("toCopy")
+            }
+            
+            dependencies {
+                "toCopy"(jxbrowser.core)
+                "toCopy"(jxbrowser.kotlin)
+                "toCopy"(jxbrowser.compose)
+                "toCopy"(jxbrowser.swing)
+            }
+            
+            tasks.register<Copy>("$taskName") {
+                from(configurations.getByName("toCopy"))
+                into("${libsFolder.toString().replace("\\", "/")}")
             }
             """.trimIndent(),
         )
