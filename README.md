@@ -5,6 +5,8 @@ A Gradle plug-in that provides convenience methods for adding JxBrowser dependen
 ## Usage
 
 ```kotlin
+import com.teamdev.jxbrowser.gradle.Repository
+
 plugins {
     id("com.teamdev.jxbrowser") version "1.0.2"
 }
