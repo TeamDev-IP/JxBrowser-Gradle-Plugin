@@ -35,6 +35,7 @@ dependencies {
     implementation(jxbrowser.swt)
     implementation(jxbrowser.swing)
     implementation(jxbrowser.javafx)
+    implementation(jxbrowser.compose)
 
     // Detects the current platform and adds the corresponding Chromium binaries.
     implementation(jxbrowser.currentPlatform)
