@@ -18,12 +18,12 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 object BuildSettings {
     const val GROUP = "com.teamdev.jxbrowser"
-    const val VERSION = "1.0.2"
-    const val JXBROWSER_VERSION = "7.38.0"
+    const val VERSION = "1.1.0"
+    const val JXBROWSER_VERSION = "7.39.1"
     val javaVersion = JavaVersion.VERSION_1_8
 }
 
@@ -70,6 +70,7 @@ java {
 }
 
 kotlin {
+    compilerOptions.jvmTarget = JvmTarget.JVM_1_8
     explicitApi()
 }
 
@@ -97,10 +98,6 @@ publishing {
             url = uri("../local-plugin-repository")
         }
     }
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = BuildSettings.javaVersion.toString()
 }
 
 tasks.withType<Test> {
