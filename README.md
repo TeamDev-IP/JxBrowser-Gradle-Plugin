@@ -8,13 +8,13 @@ A Gradle plug-in that provides convenience methods for adding JxBrowser dependen
 import com.teamdev.jxbrowser.gradle.Repository
 
 plugins {
-    id("com.teamdev.jxbrowser") version "1.0.2"
+    id("com.teamdev.jxbrowser") version "1.1.0"
 }
 
 jxbrowser {
     // The JxBrowser version. A mandatory field.
     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
-    version = "7.38.0"
+    version = "7.39.1"
 
     // The location of JxBrowser repository to use. It's either North America or Europe.
     // If not specified, the location is set to North America.

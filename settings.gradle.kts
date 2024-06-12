@@ -18,4 +18,4 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-rootProject.name = "JxBrowser-Gradle-Plugin"
+rootProject.name = "jxbrowser-gradle-plugin"
