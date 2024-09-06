@@ -113,6 +113,12 @@ public open class JxBrowserExtension(private val project: Project) {
     public val win32: Provider<String> = artifact("win32")
 
     /**
+     * Returns a dependency notation for the `jxbrowser-win-arm64`,
+     * an artifact with Chromium Windows ARM 64-bit binaries.
+     */
+    public val winArm64: Provider<String> = artifact("win-arm64")
+
+    /**
      * Returns a dependency notation for the `jxbrowser-linux64`,
      * an artifact with Chromium Linux 64-bit binaries.
      */
@@ -152,6 +158,7 @@ public open class JxBrowserExtension(private val project: Project) {
         val platformMap =
             mapOf(
                 Pair({ isX64Bit() && isWindows() }, win64),
+                Pair({ isArm() && isWindows() }, winArm64),
                 Pair({ isX64Bit() && isLinux() }, linux64),
                 Pair({ isX64Bit() && isMac() }, mac),
                 Pair({ is32Bit() && isWindows() }, win32),
