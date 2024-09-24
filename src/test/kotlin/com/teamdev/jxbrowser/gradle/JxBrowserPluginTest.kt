@@ -65,7 +65,7 @@ internal class JxBrowserPluginTest {
             win64.get() shouldBe "$group:jxbrowser-win64:$jxBrowserVersion"
             if (jxBrowserVersion.startsWith("8")) {
                 // As for now, Windows ARM is only supported in JxBrowser 8.
-                winArm64.get() shouldBe "$group:jxbrowser-win64-arm:$jxBrowserVersion"
+                win64Arm.get() shouldBe "$group:jxbrowser-win64-arm:$jxBrowserVersion"
             }
             javafx.get() shouldBe "$group:jxbrowser-javafx:$jxBrowserVersion"
             macArm.get() shouldBe "$group:jxbrowser-mac-arm:$jxBrowserVersion"

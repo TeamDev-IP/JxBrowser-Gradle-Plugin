@@ -116,7 +116,7 @@ public open class JxBrowserExtension(private val project: Project) {
      * Returns a dependency notation for the `jxbrowser-win64-arm`,
      * an artifact with Chromium Windows ARM 64-bit binaries.
      */
-    public val winArm64: Provider<String> = artifact("win64-arm")
+    public val win64Arm: Provider<String> = artifact("win64-arm")
 
     /**
      * Returns a dependency notation for the `jxbrowser-linux64`,
@@ -156,15 +156,18 @@ public open class JxBrowserExtension(private val project: Project) {
 
     private fun currentPlatform(): Provider<String> {
         val platformMap =
-            mapOf(
+            mutableMapOf(
                 Pair({ isX64Bit() && isWindows() }, win64),
-                Pair({ isArm() && isWindows() }, winArm64),
                 Pair({ isX64Bit() && isLinux() }, linux64),
                 Pair({ isX64Bit() && isMac() }, mac),
                 Pair({ is32Bit() && isWindows() }, win32),
                 Pair({ isArm() && isLinux() }, linuxArm),
                 Pair({ isArm() && isMac() }, macArm),
             )
+        if (version.startsWith("8")) {
+            // As for now, Windows ARM is only supported in JxBrowser 8.
+            platformMap[{isArm() && isWindows()}] = win64Arm
+        }
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"

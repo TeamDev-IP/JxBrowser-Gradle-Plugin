@@ -121,8 +121,10 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.mac)
                 "toCopy"(jxbrowser.macArm)
                 "toCopy"(jxbrowser.win32)
+                if ("$jxBrowserVersion".startsWith("8")) {
+                  "toCopy"(jxbrowser.win64Arm) 
+                }
                 "toCopy"(jxbrowser.win64)
-                "toCopy"(jxbrowser.winArm64)
                 "toCopy"(jxbrowser.linux64)
                 "toCopy"(jxbrowser.linuxArm)
             }
