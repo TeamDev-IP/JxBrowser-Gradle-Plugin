@@ -82,20 +82,22 @@ internal class JxBrowserPluginFunctionalTest {
     fun `download JxBrowser jars`() {
         val taskName = "downloadJars"
         val filesToCheck =
-            listOf(
+            mutableListOf(
                 "jxbrowser-$jxBrowserVersion.jar",
                 "jxbrowser-javafx-$jxBrowserVersion.jar",
                 "jxbrowser-swing-$jxBrowserVersion.jar",
                 "jxbrowser-swt-$jxBrowserVersion.jar",
                 "jxbrowser-win64-$jxBrowserVersion.jar",
                 "jxbrowser-win32-$jxBrowserVersion.jar",
-                "jxbrowser-win-arm64-$jxBrowserVersion.jar",
                 "jxbrowser-linux64-$jxBrowserVersion.jar",
                 "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
                 "jxbrowser-mac-$jxBrowserVersion.jar",
                 "jxbrowser-mac-arm-$jxBrowserVersion.jar",
             )
-
+        if (jxBrowserVersion.startsWith("8")) {
+            // As for now, Windows ARM is only supported in JxBrowser 8.
+            filesToCheck.add("jxbrowser-win64-arm-$jxBrowserVersion.jar")
+        }
         buildFile.writeText(
             """ 
             plugins {

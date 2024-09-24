@@ -63,7 +63,10 @@ internal class JxBrowserPluginTest {
             swing.get() shouldBe "$group:jxbrowser-swing:$jxBrowserVersion"
             win32.get() shouldBe "$group:jxbrowser-win32:$jxBrowserVersion"
             win64.get() shouldBe "$group:jxbrowser-win64:$jxBrowserVersion"
-            winArm64.get() shouldBe "$group:jxbrowser-win-arm64:$jxBrowserVersion"
+            if (jxBrowserVersion.startsWith("8")) {
+                // As for now, Windows ARM is only supported in JxBrowser 8.
+                winArm64.get() shouldBe "$group:jxbrowser-win64-arm:$jxBrowserVersion"
+            }
             javafx.get() shouldBe "$group:jxbrowser-javafx:$jxBrowserVersion"
             macArm.get() shouldBe "$group:jxbrowser-mac-arm:$jxBrowserVersion"
             linux64.get() shouldBe "$group:jxbrowser-linux64:$jxBrowserVersion"
