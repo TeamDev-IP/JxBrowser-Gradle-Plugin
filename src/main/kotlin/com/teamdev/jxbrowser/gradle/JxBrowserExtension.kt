@@ -115,6 +115,8 @@ public open class JxBrowserExtension(private val project: Project) {
     /**
      * Returns a dependency notation for the `jxbrowser-win64-arm`,
      * an artifact with Chromium Windows ARM 64-bit binaries.
+     *
+     * As for now, Windows ARM is only supported in JxBrowser 8.x.x.
      */
     public val win64Arm: Provider<String> = artifact("win64-arm")
 
@@ -179,6 +181,9 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun artifact(shortName: String) =
         project.providers.provider {
             check(version.isNotBlank()) { "JxBrowser version is not specified." }
+            check(!(!version.startsWith("8") && shortName.equals("win64-arm"))) {
+                "Windows ARM is not supported in JxBrowser $version. Use 8.x.x."
+            }
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$version"
             } else {
