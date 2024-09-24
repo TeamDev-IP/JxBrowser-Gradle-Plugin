@@ -157,16 +157,16 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun currentPlatform(): Provider<String> {
         val platformMap =
             mutableMapOf(
-                Pair({ isX64Bit() && isWindows() }, win64),
-                Pair({ isX64Bit() && isLinux() }, linux64),
-                Pair({ isX64Bit() && isMac() }, mac),
-                Pair({ is32Bit() && isWindows() }, win32),
-                Pair({ isArm() && isLinux() }, linuxArm),
-                Pair({ isArm() && isMac() }, macArm),
+                { isX64Bit() && isWindows() } to win64,
+                { isX64Bit() && isLinux() } to linux64,
+                { isX64Bit() && isMac() } to mac,
+                { is32Bit() && isWindows() } to win32,
+                { isArm() && isLinux() } to linuxArm,
+                { isArm() && isMac() } to macArm,
             )
         if (version.startsWith("8")) {
             // As for now, Windows ARM is only supported in JxBrowser 8.
-            platformMap[{isArm() && isWindows()}] = win64Arm
+            platformMap.put({ isArm() && isWindows() }, win64Arm)
         }
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
