@@ -82,7 +82,7 @@ internal class JxBrowserPluginFunctionalTest {
     fun `download JxBrowser jars`() {
         val taskName = "downloadJars"
         val filesToCheck =
-            mutableListOf(
+            listOf(
                 "jxbrowser-$jxBrowserVersion.jar",
                 "jxbrowser-javafx-$jxBrowserVersion.jar",
                 "jxbrowser-swing-$jxBrowserVersion.jar",
@@ -94,10 +94,6 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-mac-$jxBrowserVersion.jar",
                 "jxbrowser-mac-arm-$jxBrowserVersion.jar",
             )
-        if (jxBrowserVersion.startsWith("8")) {
-            // As for now, Windows ARM is only supported in JxBrowser 8.
-            filesToCheck.add("jxbrowser-win64-arm-$jxBrowserVersion.jar")
-        }
         buildFile.writeText(
             """ 
             plugins {
@@ -121,9 +117,6 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.mac)
                 "toCopy"(jxbrowser.macArm)
                 "toCopy"(jxbrowser.win32)
-                if ("$jxBrowserVersion".startsWith("8")) {
-                  "toCopy"(jxbrowser.win64Arm) 
-                }
                 "toCopy"(jxbrowser.win64)
                 "toCopy"(jxbrowser.linux64)
                 "toCopy"(jxbrowser.linuxArm)
@@ -157,6 +150,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-kotlin-$jxBrowserVersion.jar",
                 "jxbrowser-compose-$jxBrowserVersion.jar",
                 "jxbrowser-swing-$jxBrowserVersion.jar",
+                "jxbrowser-win64-arm-$jxBrowserVersion.jar",
             )
 
         buildFile.writeText(
@@ -180,6 +174,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
                 "toCopy"(jxbrowser.swing)
+                "toCopy"(jxbrowser.win64Arm)
             }
             
             tasks.register<Copy>("$taskName") {

@@ -158,18 +158,15 @@ public open class JxBrowserExtension(private val project: Project) {
 
     private fun currentPlatform(): Provider<String> {
         val platformMap =
-            mutableMapOf(
+            mapOf(
                 { isX64Bit() && isWindows() } to win64,
+                { is32Bit() && isWindows() } to win32,
+                { isArm() && isWindows() } to win64Arm,
                 { isX64Bit() && isLinux() } to linux64,
                 { isX64Bit() && isMac() } to mac,
-                { is32Bit() && isWindows() } to win32,
                 { isArm() && isLinux() } to linuxArm,
                 { isArm() && isMac() } to macArm,
             )
-        if (version.startsWith("8")) {
-            // As for now, Windows ARM is only supported in JxBrowser 8.
-            platformMap.put({ isArm() && isWindows() }, win64Arm)
-        }
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"
@@ -181,8 +178,8 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun artifact(shortName: String) =
         project.providers.provider {
             check(version.isNotBlank()) { "JxBrowser version is not specified." }
-            check(!(!version.startsWith("8") && shortName.equals("win64-arm"))) {
-                "Windows ARM is not supported in JxBrowser $version. Use 8.x.x."
+            if (shortName == "win64-arm" && !version.startsWith("8")) {
+                throw IllegalStateException("Windows ARM is not supported in JxBrowser $version. Use 8.x.x.")
             }
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$version"
