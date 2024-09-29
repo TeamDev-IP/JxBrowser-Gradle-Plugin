@@ -202,19 +202,19 @@ internal class JxBrowserPluginFunctionalTest {
         for (artifact in unsupportedArtifacts) {
             buildFile.writeText(
                 """ 
-            plugins {
-                java
-                id("com.teamdev.jxbrowser")
-            }
-            
-            jxbrowser {
-                version = "$jxBrowserVersion"
-            }
-            
-            dependencies {
-                implementation(jxbrowser.$artifact)
-            }
-            """.trimIndent(),
+                plugins {
+                    java
+                    id("com.teamdev.jxbrowser")
+                }
+                
+                jxbrowser {
+                    version = "$jxBrowserVersion"
+                }
+                
+                dependencies {
+                    implementation(jxbrowser.$artifact)
+                }
+                """.trimIndent(),
             )
 
             assertFails {

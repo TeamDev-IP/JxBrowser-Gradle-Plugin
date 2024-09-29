@@ -191,11 +191,12 @@ public open class JxBrowserExtension(private val project: Project) {
      * Check if the artifact with `shortName` exists in JxBrowser `version`.
      */
     private fun checkArtifactSupported(shortName: String) {
-        val artifactNameToReleaseVersion = mapOf(
-            "compose" to "8.0.0-eap.1",
-            "kotlin" to "8.0.0-eap1",
-            "win64-arm" to "8.0.0",
-        )
+        val artifactNameToReleaseVersion =
+            mapOf(
+                "compose" to "8.0.0-eap.1",
+                "kotlin" to "8.0.0-eap.1",
+                "win64-arm" to "8.0.0",
+            )
         val possibleReleaseVersion = artifactNameToReleaseVersion[shortName]
         if (possibleReleaseVersion != null) {
             val releaseVersion = Semver(possibleReleaseVersion)
