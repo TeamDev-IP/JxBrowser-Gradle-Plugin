@@ -74,12 +74,16 @@ public open class JxBrowserExtension(private val project: Project) {
     /**
      * Returns a dependency notation for the `jxbrowser-kotlin`,
      * an artifact with the Kotlin API of the library.
+     *
+     * Kotlin API is only supported in JxBrowser 8.x.x.
      */
     public val kotlin: Provider<String> = artifact("kotlin")
 
     /**
      * Returns a dependency notation for the `jxbrowser-compose`,
      * an artifact with Compose integration.
+     *
+     * Compose is only supported in JxBrowser 8.x.x.
      */
     public val compose: Provider<String> = artifact("compose")
 
@@ -117,7 +121,7 @@ public open class JxBrowserExtension(private val project: Project) {
      * Returns a dependency notation for the `jxbrowser-win64-arm`,
      * an artifact with Chromium Windows ARM 64-bit binaries.
      *
-     * As for now, Windows ARM is only supported in JxBrowser 8.x.x.
+     * Windows ARM is only supported in JxBrowser 8.x.x.
      */
     public val win64Arm: Provider<String> = artifact("win64-arm")
 
