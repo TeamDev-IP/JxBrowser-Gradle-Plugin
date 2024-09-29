@@ -56,6 +56,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("com.vdurmont:semver4j:3.1.0")
 
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())

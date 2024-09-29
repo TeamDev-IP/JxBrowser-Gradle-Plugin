@@ -28,6 +28,7 @@ import com.teamdev.jxbrowser.gradle.Environment.isWindows
 import com.teamdev.jxbrowser.gradle.Environment.isX64Bit
 import com.teamdev.jxbrowser.gradle.Environment.jvmArch
 import com.teamdev.jxbrowser.gradle.Environment.osName
+import com.vdurmont.semver4j.Semver
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 
@@ -178,15 +179,32 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun artifact(shortName: String) =
         project.providers.provider {
             check(version.isNotBlank()) { "JxBrowser version is not specified." }
-            if (shortName == "win64-arm" && !version.startsWith("8")) {
-                throw IllegalStateException("Windows ARM is not supported in JxBrowser $version. Use 8.x.x.")
-            }
+            checkArtifactSupported(shortName)
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$version"
             } else {
                 "$GROUP:jxbrowser-$shortName:$version"
             }
         }
+
+    /**
+     * Check if the artifact with `shortName` exists in JxBrowser `version`.
+     */
+    private fun checkArtifactSupported(shortName: String) {
+        val artifactNameToReleaseVersion = mapOf(
+            "compose" to "8.0.0-eap.1",
+            "kotlin" to "8.0.0-eap1",
+            "win64-arm" to "8.0.0",
+        )
+        val possibleReleaseVersion = artifactNameToReleaseVersion[shortName]
+        if (possibleReleaseVersion != null) {
+            val releaseVersion = Semver(possibleReleaseVersion)
+            val actualVersion = Semver(version)
+            check(actualVersion.isGreaterThanOrEqualTo(releaseVersion)) {
+                "Artifact '$shortName' is not supported by JxBrowser $version. Use $possibleReleaseVersion or greater."
+            }
+        }
+    }
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"
