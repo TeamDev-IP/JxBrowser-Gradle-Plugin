@@ -201,12 +201,12 @@ public open class JxBrowserExtension(private val project: Project) {
                 "kotlin" to "8.0.0-eap.1",
                 "win64-arm" to "8.0.0",
             )
-        val possibleReleaseVersion = artifactNameToReleaseVersion[shortName]
-        if (possibleReleaseVersion != null) {
-            val releaseVersion = Semver(possibleReleaseVersion)
+        val artifactReleaseVersion = artifactNameToReleaseVersion[shortName]
+        if (artifactReleaseVersion != null) {
+            val releaseVersion = Semver(artifactReleaseVersion)
             val actualVersion = Semver(version)
             check(actualVersion.isGreaterThanOrEqualTo(releaseVersion)) {
-                "Artifact '$shortName' is not supported by JxBrowser $version. Use $possibleReleaseVersion or greater."
+                "Artifact '$shortName' is not supported by JxBrowser $version. Use $artifactReleaseVersion or greater."
             }
         }
     }
