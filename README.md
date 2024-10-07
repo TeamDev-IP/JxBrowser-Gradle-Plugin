@@ -48,6 +48,7 @@ dependencies {
     implementation(jxbrowser.macArm)
     implementation(jxbrowser.win32)
     implementation(jxbrowser.win64)
+    implementation(jxbrowser.win64Arm)
     implementation(jxbrowser.linux64)
     implementation(jxbrowser.linuxArm)
 }

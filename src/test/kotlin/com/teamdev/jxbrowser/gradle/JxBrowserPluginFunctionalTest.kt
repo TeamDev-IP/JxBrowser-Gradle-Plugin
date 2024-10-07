@@ -30,6 +30,7 @@ import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertFails
 
 @DisplayName("JxBrowserPlugin should")
 internal class JxBrowserPluginFunctionalTest {
@@ -94,7 +95,6 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-mac-$jxBrowserVersion.jar",
                 "jxbrowser-mac-arm-$jxBrowserVersion.jar",
             )
-
         buildFile.writeText(
             """ 
             plugins {
@@ -192,6 +192,39 @@ internal class JxBrowserPluginFunctionalTest {
 
         result.outcome(":$taskName") shouldBe SUCCESS
         libsFolder.files() shouldContainExactlyInAnyOrder filesToCheck
+    }
+
+    @Test
+    fun `fail to download unsupported artifacts`() {
+        val jxBrowserVersion = "7.40.0" // This version doesn't contain artifacts bellow.
+        val unsupportedArtifacts = listOf("kotlin", "compose", "win64-arm")
+
+        for (artifact in unsupportedArtifacts) {
+            buildFile.writeText(
+                """ 
+                plugins {
+                    java
+                    id("com.teamdev.jxbrowser")
+                }
+                
+                jxbrowser {
+                    version = "$jxBrowserVersion"
+                }
+                
+                dependencies {
+                    implementation(jxbrowser.$artifact)
+                }
+                """.trimIndent(),
+            )
+
+            assertFails {
+                GradleRunner.create()
+                    .withProjectDir(testProjectDir)
+                    .withPluginClasspath()
+                    .withArguments("build")
+                    .build()
+            }
+        }
     }
 
     private fun BuildResult.outcome(taskName: String) = this.task(taskName)!!.outcome

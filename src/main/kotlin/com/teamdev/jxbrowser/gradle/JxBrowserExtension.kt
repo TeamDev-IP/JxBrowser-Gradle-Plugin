@@ -28,6 +28,7 @@ import com.teamdev.jxbrowser.gradle.Environment.isWindows
 import com.teamdev.jxbrowser.gradle.Environment.isX64Bit
 import com.teamdev.jxbrowser.gradle.Environment.jvmArch
 import com.teamdev.jxbrowser.gradle.Environment.osName
+import com.vdurmont.semver4j.Semver
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 
@@ -73,12 +74,16 @@ public open class JxBrowserExtension(private val project: Project) {
     /**
      * Returns a dependency notation for the `jxbrowser-kotlin`,
      * an artifact with the Kotlin API of the library.
+     *
+     * Kotlin API is only supported in JxBrowser 8.x.x.
      */
     public val kotlin: Provider<String> = artifact("kotlin")
 
     /**
      * Returns a dependency notation for the `jxbrowser-compose`,
      * an artifact with Compose integration.
+     *
+     * Compose is only supported in JxBrowser 8.x.x.
      */
     public val compose: Provider<String> = artifact("compose")
 
@@ -111,6 +116,14 @@ public open class JxBrowserExtension(private val project: Project) {
      * an artifact with Chromium Windows 32-bit binaries.
      */
     public val win32: Provider<String> = artifact("win32")
+
+    /**
+     * Returns a dependency notation for the `jxbrowser-win64-arm`,
+     * an artifact with Chromium Windows ARM 64-bit binaries.
+     *
+     * Windows ARM is only supported in JxBrowser 8.x.x.
+     */
+    public val win64Arm: Provider<String> = artifact("win64-arm")
 
     /**
      * Returns a dependency notation for the `jxbrowser-linux64`,
@@ -151,12 +164,13 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun currentPlatform(): Provider<String> {
         val platformMap =
             mapOf(
-                Pair({ isX64Bit() && isWindows() }, win64),
-                Pair({ isX64Bit() && isLinux() }, linux64),
-                Pair({ isX64Bit() && isMac() }, mac),
-                Pair({ is32Bit() && isWindows() }, win32),
-                Pair({ isArm() && isLinux() }, linuxArm),
-                Pair({ isArm() && isMac() }, macArm),
+                { isX64Bit() && isWindows() } to win64,
+                { is32Bit() && isWindows() } to win32,
+                { isArm() && isWindows() } to win64Arm,
+                { isX64Bit() && isLinux() } to linux64,
+                { isX64Bit() && isMac() } to mac,
+                { isArm() && isLinux() } to linuxArm,
+                { isArm() && isMac() } to macArm,
             )
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
@@ -169,12 +183,33 @@ public open class JxBrowserExtension(private val project: Project) {
     private fun artifact(shortName: String) =
         project.providers.provider {
             check(version.isNotBlank()) { "JxBrowser version is not specified." }
+            checkArtifactSupported(shortName)
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$version"
             } else {
                 "$GROUP:jxbrowser-$shortName:$version"
             }
         }
+
+    /**
+     * Check if the artifact with `shortName` exists in JxBrowser `version`.
+     */
+    private fun checkArtifactSupported(shortName: String) {
+        val artifactNameToReleaseVersion =
+            mapOf(
+                "compose" to "8.0.0-eap.1",
+                "kotlin" to "8.0.0-eap.1",
+                "win64-arm" to "8.0.0",
+            )
+        val artifactReleaseVersion = artifactNameToReleaseVersion[shortName]
+        if (artifactReleaseVersion != null) {
+            val releaseVersion = Semver(artifactReleaseVersion)
+            val actualVersion = Semver(version)
+            check(actualVersion.isGreaterThanOrEqualTo(releaseVersion)) {
+                "Artifact '$shortName' is not supported by JxBrowser $version. Use $artifactReleaseVersion or greater."
+            }
+        }
+    }
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"
