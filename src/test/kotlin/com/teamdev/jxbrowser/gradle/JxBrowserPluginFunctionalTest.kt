@@ -173,7 +173,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.core)
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
-                "toCopy"(jxbrowser.win64Arm)
+                "toCopy"(jxbrowser.winArm)
             }
             
             tasks.register<Copy>("$taskName") {
