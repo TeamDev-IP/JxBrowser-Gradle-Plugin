@@ -123,7 +123,7 @@ public open class JxBrowserExtension(private val project: Project) {
      *
      * Windows ARM is only supported in JxBrowser 8.x.x.
      */
-    public val win64Arm: Provider<String> = artifact("win64-arm")
+    public val winArm: Provider<String> = artifact("win64-arm")
 
     /**
      * Returns a dependency notation for the `jxbrowser-linux64`,
@@ -166,7 +166,7 @@ public open class JxBrowserExtension(private val project: Project) {
             mapOf(
                 { isX64Bit() && isWindows() } to win64,
                 { is32Bit() && isWindows() } to win32,
-                { isArm() && isWindows() } to win64Arm,
+                { isArm() && isWindows() } to winArm,
                 { isX64Bit() && isLinux() } to linux64,
                 { isX64Bit() && isMac() } to mac,
                 { isArm() && isLinux() } to linuxArm,

@@ -8,7 +8,7 @@ A Gradle plug-in that provides convenience methods for adding JxBrowser dependen
 import com.teamdev.jxbrowser.gradle.Repository
 
 plugins {
-    id("com.teamdev.jxbrowser") version "1.2.0"
+    id("com.teamdev.jxbrowser") version "1.2.1"
 }
 
 jxbrowser {
@@ -48,7 +48,7 @@ dependencies {
     implementation(jxbrowser.macArm)
     implementation(jxbrowser.win32)
     implementation(jxbrowser.win64)
-    implementation(jxbrowser.win64Arm)
+    implementation(jxbrowser.winArm)
     implementation(jxbrowser.linux64)
     implementation(jxbrowser.linuxArm)
 }

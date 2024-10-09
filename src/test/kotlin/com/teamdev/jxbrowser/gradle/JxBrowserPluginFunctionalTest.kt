@@ -173,7 +173,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.core)
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
-                "toCopy"(jxbrowser.win64Arm)
+                "toCopy"(jxbrowser.winArm)
             }
             
             tasks.register<Copy>("$taskName") {
@@ -197,7 +197,7 @@ internal class JxBrowserPluginFunctionalTest {
     @Test
     fun `fail to download unsupported artifacts`() {
         val jxBrowserVersion = "7.40.0" // This version doesn't contain artifacts bellow.
-        val unsupportedArtifacts = listOf("kotlin", "compose", "win64-arm")
+        val unsupportedArtifacts = listOf("kotlin", "compose", "winArm")
 
         for (artifact in unsupportedArtifacts) {
             buildFile.writeText(
