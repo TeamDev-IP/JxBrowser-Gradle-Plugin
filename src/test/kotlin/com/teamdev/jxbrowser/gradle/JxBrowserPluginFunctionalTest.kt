@@ -144,13 +144,13 @@ internal class JxBrowserPluginFunctionalTest {
     @Test
     fun `download JxBrowser 8 jars`() {
         val taskName = "downloadJars"
-        val jxBrowserVersion = "8.0.0-eap.1"
+        val jxBrowserVersion = "8.0.0"
         val filesToCheck =
             listOf(
                 "jxbrowser-$jxBrowserVersion.jar",
                 "jxbrowser-kotlin-$jxBrowserVersion.jar",
                 "jxbrowser-compose-$jxBrowserVersion.jar",
-                "jxbrowser-swing-$jxBrowserVersion.jar",
+                "jxbrowser-win64-arm-$jxBrowserVersion.jar",
             )
 
         buildFile.writeText(
@@ -173,7 +173,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.core)
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
-                "toCopy"(jxbrowser.swing)
+                "toCopy"(jxbrowser.win64Arm)
             }
             
             tasks.register<Copy>("$taskName") {
