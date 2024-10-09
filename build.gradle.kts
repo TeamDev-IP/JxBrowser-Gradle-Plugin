@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 object BuildSettings {
     const val GROUP = "com.teamdev.jxbrowser"
-    const val VERSION = "1.1.0"
-    const val JXBROWSER_VERSION = "7.39.1"
+    const val VERSION = "1.2.0"
+    const val JXBROWSER_VERSION = "8.0.0"
     val javaVersion = JavaVersion.VERSION_1_8
 }
 
