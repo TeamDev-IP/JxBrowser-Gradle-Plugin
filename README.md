@@ -12,11 +12,12 @@ plugins {
 }
 
 jxbrowser {
-    // The JxBrowser version. A mandatory field.
+    // The JxBrowser version (required).
     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
-    version = "8.1.0"
+    version = "8.2.0"
 
-    // The location of JxBrowser repository to use. It's either North America or Europe.
+    // The location of JxBrowser repository to use (optional).
+    // It's either North America or Europe.
     // If not specified, the location is set to North America.
     repository = Repository.EUROPE
     // repository = Repository.NORTH_AMERICA
