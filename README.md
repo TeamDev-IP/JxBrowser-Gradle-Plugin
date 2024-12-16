@@ -14,7 +14,7 @@ plugins {
 jxbrowser {
     // The JxBrowser version (required).
     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
-    version = "8.2.0"
+    version = "8.2.1"
 
     // The location of JxBrowser repository to use (optional).
     // It's either North America or Europe.
