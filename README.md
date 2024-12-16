@@ -44,6 +44,9 @@ dependencies {
     implementation(jxbrowser.swing)
     implementation(jxbrowser.javafx)
     implementation(jxbrowser.compose)
+
+    // Adds dependency to the JxBrowser Kotlin DSL.
+    implementation(jxbrowser.kotlin)
 }
 ```
 
