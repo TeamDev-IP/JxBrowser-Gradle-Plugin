@@ -78,6 +78,7 @@ internal class JxBrowserPluginTest {
         mavenRepositoryUrls() shouldContain customRepository
 
         val eapRepository = "https://europe-maven.pkg.dev/jxbrowser/eaps"
+        extension.version.set("8.2.2")
         extension.includePreviewBuilds()
         project.evaluationDependsOn(":")
         mavenRepositoryUrls() shouldContain eapRepository
