@@ -22,6 +22,7 @@ package com.teamdev.jxbrowser.gradle
 
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
@@ -217,14 +218,40 @@ internal class JxBrowserPluginFunctionalTest {
                 """.trimIndent(),
             )
 
-            assertFails {
+            val failure = assertFails {
                 GradleRunner.create()
                     .withProjectDir(testProjectDir)
                     .withPluginClasspath()
                     .withArguments("build")
                     .build()
             }
+            failure.message shouldContain "is not supported by JxBrowser"
         }
+    }
+
+    @Test
+    fun `require JxBrowser version`() {
+        buildFile.writeText(
+            """ 
+            plugins {
+                base
+                id("com.teamdev.jxbrowser")
+            }
+
+            jxbrowser {
+                includePreviewBuilds()
+            }
+            """.trimIndent(),
+        )
+
+        val failure = assertFails {
+            GradleRunner.create()
+                .withProjectDir(testProjectDir)
+                .withPluginClasspath()
+                .withArguments("check")
+                .build()
+        }
+        failure.message shouldContain "JxBrowser version is not specified"
     }
 
     private fun BuildResult.outcome(taskName: String) = this.task(taskName)!!.outcome

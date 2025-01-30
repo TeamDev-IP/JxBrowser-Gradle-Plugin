@@ -54,7 +54,7 @@ internal class JxBrowserPluginTest {
     @Test
     fun `resolve dependencies`() {
         with(extension) {
-            version = jxBrowserVersion
+            version.set(jxBrowserVersion)
             val group = "com.teamdev.jxbrowser"
 
             swt.get() shouldBe "$group:jxbrowser-swt:$jxBrowserVersion"

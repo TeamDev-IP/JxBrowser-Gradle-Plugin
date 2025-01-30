@@ -29,7 +29,9 @@ import com.teamdev.jxbrowser.gradle.Environment.isX64Bit
 import com.teamdev.jxbrowser.gradle.Environment.jvmArch
 import com.teamdev.jxbrowser.gradle.Environment.osName
 import com.vdurmont.semver4j.Semver
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 
 /**
@@ -40,12 +42,21 @@ import org.gradle.api.provider.Provider
  * and various JxBrowser dependencies based on your project's needs.
  */
 public open class JxBrowserExtension(private val project: Project) {
+
+    init {
+        project.afterEvaluate {
+            if (!version.isPresent) {
+                throw InvalidUserDataException("JxBrowser version is not specified.")
+            }
+        }
+    }
+
     /**
      * A version of the JxBrowser.
      *
      * This is a mandatory field.
      */
-    public var version: String = ""
+    public val version: Property<String> = project.objects.property(String::class.java)
 
     /**
      * The preferred location of the JxBrowser repository.
@@ -175,26 +186,25 @@ public open class JxBrowserExtension(private val project: Project) {
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"
-                val errorMessage = "The current $currentPlatform platform is not supported by JxBrowser $version."
+                val errorMessage = "The current $currentPlatform platform is not supported by JxBrowser ${version.get()}"
                 throw IllegalStateException(errorMessage)
             }
     }
 
     private fun artifact(shortName: String) =
-        project.providers.provider {
-            check(version.isNotBlank()) { "JxBrowser version is not specified." }
-            checkArtifactSupported(shortName)
+        version.map { versionValue ->
+            checkArtifactSupported(shortName, versionValue)
             if (shortName == "core") {
-                "$GROUP:jxbrowser:$version"
+                "$GROUP:jxbrowser:$versionValue"
             } else {
-                "$GROUP:jxbrowser-$shortName:$version"
+                "$GROUP:jxbrowser-$shortName:$versionValue"
             }
         }
 
     /**
      * Checks if the artifact with [shortName] exists in JxBrowser [version].
      */
-    private fun checkArtifactSupported(shortName: String) {
+    private fun checkArtifactSupported(shortName: String, version: String) {
         val artifactNameToReleaseVersion =
             mapOf(
                 "compose" to "8.0.0",
