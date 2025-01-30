@@ -218,13 +218,14 @@ internal class JxBrowserPluginFunctionalTest {
                 """.trimIndent(),
             )
 
-            val failure = assertFails {
-                GradleRunner.create()
-                    .withProjectDir(testProjectDir)
-                    .withPluginClasspath()
-                    .withArguments("build")
-                    .build()
-            }
+            val failure =
+                assertFails {
+                    GradleRunner.create()
+                        .withProjectDir(testProjectDir)
+                        .withPluginClasspath()
+                        .withArguments("build")
+                        .build()
+                }
             failure.message shouldContain "is not supported by JxBrowser"
         }
     }
@@ -244,13 +245,14 @@ internal class JxBrowserPluginFunctionalTest {
             """.trimIndent(),
         )
 
-        val failure = assertFails {
-            GradleRunner.create()
-                .withProjectDir(testProjectDir)
-                .withPluginClasspath()
-                .withArguments("check")
-                .build()
-        }
+        val failure =
+            assertFails {
+                GradleRunner.create()
+                    .withProjectDir(testProjectDir)
+                    .withPluginClasspath()
+                    .withArguments("check")
+                    .build()
+            }
         failure.message shouldContain "JxBrowser version is not specified"
     }
 

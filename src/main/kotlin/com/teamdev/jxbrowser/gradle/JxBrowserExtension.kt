@@ -42,7 +42,6 @@ import org.gradle.api.provider.Provider
  * and various JxBrowser dependencies based on your project's needs.
  */
 public open class JxBrowserExtension(private val project: Project) {
-
     init {
         project.afterEvaluate {
             if (!version.isPresent) {
@@ -191,8 +190,8 @@ public open class JxBrowserExtension(private val project: Project) {
             }
     }
 
-    private fun artifact(shortName: String) =
-        version.map { versionValue ->
+    private fun artifact(shortName: String): Provider<String> {
+        return version.map { versionValue ->
             checkArtifactSupported(shortName, versionValue)
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$versionValue"
@@ -200,11 +199,15 @@ public open class JxBrowserExtension(private val project: Project) {
                 "$GROUP:jxbrowser-$shortName:$versionValue"
             }
         }
+    }
 
     /**
      * Checks if the artifact with [shortName] exists in JxBrowser [version].
      */
-    private fun checkArtifactSupported(shortName: String, version: String) {
+    private fun checkArtifactSupported(
+        shortName: String,
+        version: String,
+    ) {
         val artifactNameToReleaseVersion =
             mapOf(
                 "compose" to "8.0.0",
