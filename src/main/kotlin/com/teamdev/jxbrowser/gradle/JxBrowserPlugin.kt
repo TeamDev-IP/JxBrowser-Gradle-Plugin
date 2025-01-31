@@ -36,7 +36,7 @@ import org.gradle.api.Project
  *
  * jxbrowser {
  *     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
- *     version = "7.36"
+ *     version = "8.2.2"
  *
  *     // Use JxBrowser repository at specific location. It's North America by default.
  *     repository = Repository.NORTH_AMERICA
