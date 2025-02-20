@@ -54,7 +54,7 @@ internal class JxBrowserPluginTest {
     @Test
     fun `resolve dependencies`() {
         with(extension) {
-            version = jxBrowserVersion
+            version.set(jxBrowserVersion)
             val group = "com.teamdev.jxbrowser"
 
             swt.get() shouldBe "$group:jxbrowser-swt:$jxBrowserVersion"
@@ -78,6 +78,7 @@ internal class JxBrowserPluginTest {
         mavenRepositoryUrls() shouldContain customRepository
 
         val eapRepository = "https://europe-maven.pkg.dev/jxbrowser/eaps"
+        extension.version.set("8.2.2")
         extension.includePreviewBuilds()
         project.evaluationDependsOn(":")
         mavenRepositoryUrls() shouldContain eapRepository

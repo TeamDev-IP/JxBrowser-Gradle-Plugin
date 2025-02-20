@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 object BuildSettings {
     const val GROUP = "com.teamdev.jxbrowser"
-    const val VERSION = "1.2.1"
-    const val JXBROWSER_VERSION = "8.2.1"
+    const val VERSION = "2.0.0"
+    const val JXBROWSER_VERSION = "8.3.0"
     val javaVersion = JavaVersion.VERSION_1_8
 }
 
@@ -41,9 +41,9 @@ object PluginProperties {
 
 plugins {
     `java-gradle-plugin`
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.1.10"
     id("maven-publish")
-    id("com.gradle.plugin-publish") version "1.3.0"
+    id("com.gradle.plugin-publish") version "1.3.1"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
