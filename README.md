@@ -14,10 +14,10 @@ plugins {
 jxbrowser {
     // The JxBrowser version (required).
     // Obtain the latest release version number at https://teamdev.com/jxbrowser/.
-    version = "8.8.0"
+    version = "8.9.0"
     
     // If you're using Gradle 8.1.1 or older, use the following syntax:
-    // version.set("8.8.0")
+    // version.set("8.9.0")
 
     // The location of JxBrowser repository to use (optional).
     // It's either North America or Europe.
