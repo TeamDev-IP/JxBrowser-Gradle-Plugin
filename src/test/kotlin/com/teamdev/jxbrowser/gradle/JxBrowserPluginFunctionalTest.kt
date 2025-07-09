@@ -71,7 +71,8 @@ internal class JxBrowserPluginFunctionalTest {
         )
 
         val result =
-            GradleRunner.create()
+            GradleRunner
+                .create()
                 .withProjectDir(testProjectDir)
                 .withPluginClasspath()
                 .withArguments("build")
@@ -132,7 +133,8 @@ internal class JxBrowserPluginFunctionalTest {
         )
 
         val result =
-            GradleRunner.create()
+            GradleRunner
+                .create()
                 .withProjectDir(testProjectDir)
                 .withPluginClasspath()
                 .withArguments(taskName)
@@ -185,7 +187,8 @@ internal class JxBrowserPluginFunctionalTest {
         )
 
         val result =
-            GradleRunner.create()
+            GradleRunner
+                .create()
                 .withProjectDir(testProjectDir)
                 .withPluginClasspath()
                 .withArguments(taskName)
@@ -220,7 +223,8 @@ internal class JxBrowserPluginFunctionalTest {
 
             val failure =
                 assertFails {
-                    GradleRunner.create()
+                    GradleRunner
+                        .create()
                         .withProjectDir(testProjectDir)
                         .withPluginClasspath()
                         .withArguments("build")
@@ -247,7 +251,8 @@ internal class JxBrowserPluginFunctionalTest {
 
         val failure =
             assertFails {
-                GradleRunner.create()
+                GradleRunner
+                    .create()
                     .withProjectDir(testProjectDir)
                     .withPluginClasspath()
                     .withArguments("check")

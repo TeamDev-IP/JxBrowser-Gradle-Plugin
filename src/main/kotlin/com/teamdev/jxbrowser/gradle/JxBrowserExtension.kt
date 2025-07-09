@@ -41,7 +41,9 @@ import org.gradle.api.provider.Provider
  * It provides options for specifying the JxBrowser version, repository location,
  * and various JxBrowser dependencies based on your project's needs.
  */
-public open class JxBrowserExtension(private val project: Project) {
+public open class JxBrowserExtension(
+    private val project: Project,
+) {
     init {
         project.afterEvaluate {
             if (!version.isPresent) {
@@ -185,13 +187,14 @@ public open class JxBrowserExtension(private val project: Project) {
         return platformMap.entries.firstOrNull { it.key() }?.value
             ?: project.providers.provider {
                 val currentPlatform = "${osName()} ${jvmArch()}"
-                val errorMessage = "The current $currentPlatform platform is not supported by JxBrowser ${version.get()}"
+                val errorMessage =
+                    "The current $currentPlatform platform is not supported by JxBrowser ${version.get()}"
                 throw IllegalStateException(errorMessage)
             }
     }
 
-    private fun artifact(shortName: String): Provider<String> {
-        return version.map { versionValue ->
+    private fun artifact(shortName: String): Provider<String> =
+        version.map { versionValue ->
             checkArtifactSupported(shortName, versionValue)
             if (shortName == "core") {
                 "$GROUP:jxbrowser:$versionValue"
@@ -199,7 +202,6 @@ public open class JxBrowserExtension(private val project: Project) {
                 "$GROUP:jxbrowser-$shortName:$versionValue"
             }
         }
-    }
 
     /**
      * Checks if the artifact with [shortName] exists in JxBrowser [version].
