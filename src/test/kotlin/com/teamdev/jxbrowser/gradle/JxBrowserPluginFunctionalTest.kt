@@ -96,6 +96,9 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
                 "jxbrowser-mac-$jxBrowserVersion.jar",
                 "jxbrowser-mac-arm-$jxBrowserVersion.jar",
+                "jxbrowser-kotlin-$jxBrowserVersion.jar",
+                "jxbrowser-compose-$jxBrowserVersion.jar",
+                "jxbrowser-win64-arm-$jxBrowserVersion.jar",
             )
         buildFile.writeText(
             """ 
@@ -123,57 +126,6 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.win64)
                 "toCopy"(jxbrowser.linux64)
                 "toCopy"(jxbrowser.linuxArm)
-            }
-            
-            tasks.register<Copy>("$taskName") {
-                from(configurations.getByName("toCopy"))
-                into("${libsFolder.toString().replace("\\", "/")}")
-            }
-            """.trimIndent(),
-        )
-
-        val result =
-            GradleRunner
-                .create()
-                .withProjectDir(testProjectDir)
-                .withPluginClasspath()
-                .withArguments(taskName)
-                .build()
-
-        result.outcome(":$taskName") shouldBe SUCCESS
-        libsFolder.files() shouldContainExactlyInAnyOrder filesToCheck
-    }
-
-    @Test
-    fun `download JxBrowser 8 jars`() {
-        val taskName = "downloadJars"
-        val jxBrowserVersion = "8.0.0"
-        val filesToCheck =
-            listOf(
-                "jxbrowser-$jxBrowserVersion.jar",
-                "jxbrowser-kotlin-$jxBrowserVersion.jar",
-                "jxbrowser-compose-$jxBrowserVersion.jar",
-                "jxbrowser-win64-arm-$jxBrowserVersion.jar",
-            )
-
-        buildFile.writeText(
-            """ 
-            plugins {
-                base
-                id("com.teamdev.jxbrowser")
-            }
-            
-            jxbrowser {
-                version = "$jxBrowserVersion"
-                includePreviewBuilds()
-            }
-            
-            configurations {
-                create("toCopy")
-            }
-            
-            dependencies {
-                "toCopy"(jxbrowser.core)
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
                 "toCopy"(jxbrowser.winArm)
