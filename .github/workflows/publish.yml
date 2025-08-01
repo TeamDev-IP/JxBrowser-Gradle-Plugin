@@ -15,8 +15,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
-          java-version: 8
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Run Gradle tasks
         run: ./gradlew check
