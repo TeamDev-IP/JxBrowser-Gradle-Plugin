@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 object BuildSettings {
     const val GROUP = "com.teamdev.jxbrowser"
     const val VERSION = "2.0.0"
-    const val JXBROWSER_VERSION = "8.9.4"
+    const val JXBROWSER_VERSION = "8.10.0"
     val javaVersion = JavaVersion.VERSION_1_8
 }
 
@@ -41,7 +41,7 @@ object PluginProperties {
 
 plugins {
     `java-gradle-plugin`
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     id("maven-publish")
     id("com.gradle.plugin-publish") version "1.3.1"
     id("org.jlleitschuh.gradle.ktlint") version "13.0.0"
@@ -60,7 +60,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
-    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+    testImplementation("io.kotest:kotest-assertions-core:6.0.0")
 }
 
 java {
