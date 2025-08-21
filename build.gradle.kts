@@ -1,5 +1,5 @@
 /*
- *  Copyright 2023, TeamDev. All rights reserved.
+ *  Copyright 2025, TeamDev. All rights reserved.
  *
  *  Redistribution and use in source and/or binary forms, with or without
  *  modification, must retain the above copyright notice and the following
@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 object BuildSettings {
     const val GROUP = "com.teamdev.jxbrowser"
     const val VERSION = "2.0.0"
-    const val JXBROWSER_VERSION = "8.10.0"
+    const val JXBROWSER_VERSION = "8.11.0"
     val javaVersion = JavaVersion.VERSION_1_8
 }
 
