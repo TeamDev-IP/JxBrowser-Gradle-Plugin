@@ -162,6 +162,20 @@ public open class JxBrowserExtension(
     public val macArm: Provider<String> = artifact("mac-arm")
 
     /**
+     * Returns a dependency notation for the `jxbrowser-mac-mas`,
+     * an artifact with Chromium macOS (Intel) binaries that comply
+     * with Mac App Store distribution requirements.
+     */
+    public val macMas: Provider<String> = artifact("mac-mas")
+
+    /**
+     * Returns a dependency notation for the `jxbrowser-mac-mas-arm`,
+     * an artifact with Chromium macOS ARM (Apple Silicon) binaries that comply
+     * with Mac App Store distribution requirements.
+     */
+    public val macMasArm: Provider<String> = artifact("mac-mas-arm")
+
+    /**
      * Returns a dependency notation for the `jxbrowser-cross-platform`,
      * an artifact that includes binaries for all supported platforms.
      */
