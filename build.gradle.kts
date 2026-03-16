@@ -41,7 +41,7 @@ object PluginProperties {
 
 plugins {
     `java-gradle-plugin`
-    kotlin("jvm") version "2.3.10"
+    kotlin("jvm") version "2.3.20"
     id("maven-publish")
     id("com.gradle.plugin-publish") version "2.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
