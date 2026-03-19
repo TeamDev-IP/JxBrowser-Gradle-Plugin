@@ -95,7 +95,9 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-linux64-$jxBrowserVersion.jar",
                 "jxbrowser-linux64-arm-$jxBrowserVersion.jar",
                 "jxbrowser-mac-$jxBrowserVersion.jar",
+                "jxbrowser-mac-mas-$jxBrowserVersion.jar",
                 "jxbrowser-mac-arm-$jxBrowserVersion.jar",
+                "jxbrowser-mac-mas-arm-$jxBrowserVersion.jar",
                 "jxbrowser-kotlin-$jxBrowserVersion.jar",
                 "jxbrowser-compose-$jxBrowserVersion.jar",
                 "jxbrowser-win64-arm-$jxBrowserVersion.jar",
@@ -121,7 +123,9 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.swing)
                 "toCopy"(jxbrowser.javafx)
                 "toCopy"(jxbrowser.mac)
+                "toCopy"(jxbrowser.macMas)
                 "toCopy"(jxbrowser.macArm)
+                "toCopy"(jxbrowser.macMasArm)
                 "toCopy"(jxbrowser.win32)
                 "toCopy"(jxbrowser.win64)
                 "toCopy"(jxbrowser.linux64)
