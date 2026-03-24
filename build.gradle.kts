@@ -60,7 +60,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
-    testImplementation("io.kotest:kotest-assertions-core:6.1.7")
+    testImplementation("io.kotest:kotest-assertions-core:6.1.8")
 }
 
 java {
