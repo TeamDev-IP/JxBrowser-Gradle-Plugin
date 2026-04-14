@@ -118,6 +118,12 @@ public open class JxBrowserExtension(
     public val swt: Provider<String> = artifact("swt")
 
     /**
+     * Returns a dependency notation for the `jxbrowser-graalvm`,
+     * an artifact containing GraalVM reachability metadata configuration.
+     */
+    public val graalvm: Provider<String> = artifact("graalvm")
+
+    /**
      * Returns a dependency notation for the `jxbrowser-win64`,
      * an artifact with Chromium Windows 64-bit binaries.
      */
