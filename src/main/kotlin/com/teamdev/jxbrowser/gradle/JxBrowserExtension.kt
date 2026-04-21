@@ -118,10 +118,10 @@ public open class JxBrowserExtension(
     public val swt: Provider<String> = artifact("swt")
 
     /**
-     * Returns a dependency notation for the `jxbrowser-graalvm`,
-     * an artifact containing GraalVM reachability metadata configuration.
+     * Returns a dependency notation for the `jxbrowser-native-image`,
+     * an artifact containing GraalVM Native Image reachability metadata configuration.
      */
-    public val graalvm: Provider<String> = artifact("graalvm")
+    public val nativeImage: Provider<String> = artifact("native-image")
 
     /**
      * Returns a dependency notation for the `jxbrowser-win64`,

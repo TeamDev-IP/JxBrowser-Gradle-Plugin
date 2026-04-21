@@ -67,10 +67,10 @@ internal class JxBrowserPluginTest {
             macArm.get() shouldBe "$group:jxbrowser-mac-arm:$jxBrowserVersion"
             kotlin.get() shouldBe "$group:jxbrowser-kotlin:$jxBrowserVersion"
             winArm.get() shouldBe "$group:jxbrowser-win64-arm:$jxBrowserVersion"
-            graalvm.get() shouldBe "$group:jxbrowser-graalvm:$jxBrowserVersion"
             compose.get() shouldBe "$group:jxbrowser-compose:$jxBrowserVersion"
             linux64.get() shouldBe "$group:jxbrowser-linux64:$jxBrowserVersion"
             linuxArm.get() shouldBe "$group:jxbrowser-linux64-arm:$jxBrowserVersion"
+            nativeImage.get() shouldBe "$group:jxbrowser-native-image:$jxBrowserVersion"
             crossPlatform.get() shouldBe "$group:jxbrowser-cross-platform:$jxBrowserVersion"
         }
     }
