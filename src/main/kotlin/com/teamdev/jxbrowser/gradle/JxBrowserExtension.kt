@@ -119,7 +119,7 @@ public open class JxBrowserExtension(
 
     /**
      * Returns a dependency notation for the `jxbrowser-native-image`,
-     * an artifact containing GraalVM Native Image reachability metadata configuration.
+     * an artifact containing GraalVM Native Image reachability metadata.
      */
     public val nativeImage: Provider<String> = artifact("native-image")
 
