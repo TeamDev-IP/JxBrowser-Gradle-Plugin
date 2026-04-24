@@ -216,12 +216,6 @@ public open class JxBrowserExtension(
         shortName: String,
         version: String,
     ) {
-        val artifactNameToReleaseVersion =
-            mapOf(
-                "compose" to "8.0.0",
-                "kotlin" to "8.0.0",
-                "win64-arm" to "8.0.0",
-            )
         val artifactReleaseVersion = artifactNameToReleaseVersion[shortName]
         if (artifactReleaseVersion != null) {
             val releaseVersion = Semver(artifactReleaseVersion)
@@ -234,5 +228,16 @@ public open class JxBrowserExtension(
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"
+
+        /**
+         * Maps an artifact short name to the first JxBrowser version that supports it.
+         */
+        private val artifactNameToReleaseVersion =
+            mapOf(
+                "compose" to "8.0.0",
+                "kotlin" to "8.0.0",
+                "win64-arm" to "8.0.0",
+                "native-image" to "9.0.0",
+            )
     }
 }
