@@ -236,9 +236,9 @@ public open class JxBrowserExtension(
          */
         private val artifactNameToReleaseVersion =
             mapOf(
-                "compose" to "9.0.0",
-                "kotlin" to "9.0.0",
-                "win64-arm" to "9.0.0",
+                "compose" to "8.0.0",
+                "kotlin" to "8.0.0",
+                "win64-arm" to "8.0.0",
                 "native-image" to "9.0.0",
             )
     }
