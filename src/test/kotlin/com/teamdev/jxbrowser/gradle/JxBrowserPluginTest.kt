@@ -70,6 +70,7 @@ internal class JxBrowserPluginTest {
             compose.get() shouldBe "$group:jxbrowser-compose:$jxBrowserVersion"
             linux64.get() shouldBe "$group:jxbrowser-linux64:$jxBrowserVersion"
             linuxArm.get() shouldBe "$group:jxbrowser-linux64-arm:$jxBrowserVersion"
+            nativeImage.get() shouldBe "$group:jxbrowser-native-image:$jxBrowserVersion"
             crossPlatform.get() shouldBe "$group:jxbrowser-cross-platform:$jxBrowserVersion"
         }
     }

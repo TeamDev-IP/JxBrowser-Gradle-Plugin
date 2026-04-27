@@ -99,6 +99,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "jxbrowser-kotlin-$jxBrowserVersion.jar",
                 "jxbrowser-compose-$jxBrowserVersion.jar",
                 "jxbrowser-win64-arm-$jxBrowserVersion.jar",
+                "jxbrowser-native-image-$jxBrowserVersion.jar",
             )
         buildFile.writeText(
             """ 
@@ -129,6 +130,7 @@ internal class JxBrowserPluginFunctionalTest {
                 "toCopy"(jxbrowser.kotlin)
                 "toCopy"(jxbrowser.compose)
                 "toCopy"(jxbrowser.winArm)
+                "toCopy"(jxbrowser.nativeImage)
             }
             
             tasks.register<Copy>("$taskName") {

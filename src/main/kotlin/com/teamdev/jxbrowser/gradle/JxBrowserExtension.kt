@@ -87,7 +87,7 @@ public open class JxBrowserExtension(
      * Returns a dependency notation for the `jxbrowser-kotlin`,
      * an artifact with the Kotlin API of the library.
      *
-     * Kotlin API is only supported in JxBrowser 8.x.x.
+     * Kotlin API is only supported in JxBrowser 8.x.x and newer.
      */
     public val kotlin: Provider<String> = artifact("kotlin")
 
@@ -95,7 +95,7 @@ public open class JxBrowserExtension(
      * Returns a dependency notation for the `jxbrowser-compose`,
      * an artifact with Compose integration.
      *
-     * Compose is only supported in JxBrowser 8.x.x.
+     * Compose is only supported in JxBrowser 8.x.x and newer.
      */
     public val compose: Provider<String> = artifact("compose")
 
@@ -116,6 +116,14 @@ public open class JxBrowserExtension(
      * an artifact with SWT integration.
      */
     public val swt: Provider<String> = artifact("swt")
+
+    /**
+     * Returns a dependency notation for the `jxbrowser-native-image`,
+     * an artifact containing GraalVM Native Image reachability metadata.
+     *
+     * Native images are only supported in JxBrowser 9.x.x and newer.
+     */
+    public val nativeImage: Provider<String> = artifact("native-image")
 
     /**
      * Returns a dependency notation for the `jxbrowser-win64`,
@@ -210,12 +218,6 @@ public open class JxBrowserExtension(
         shortName: String,
         version: String,
     ) {
-        val artifactNameToReleaseVersion =
-            mapOf(
-                "compose" to "8.0.0",
-                "kotlin" to "8.0.0",
-                "win64-arm" to "8.0.0",
-            )
         val artifactReleaseVersion = artifactNameToReleaseVersion[shortName]
         if (artifactReleaseVersion != null) {
             val releaseVersion = Semver(artifactReleaseVersion)
@@ -228,5 +230,16 @@ public open class JxBrowserExtension(
 
     private companion object {
         private const val GROUP = "com.teamdev.jxbrowser"
+
+        /**
+         * Maps an artifact short name to the first JxBrowser version that supports it.
+         */
+        private val artifactNameToReleaseVersion =
+            mapOf(
+                "compose" to "9.0.0",
+                "kotlin" to "9.0.0",
+                "win64-arm" to "9.0.0",
+                "native-image" to "9.0.0",
+            )
     }
 }
