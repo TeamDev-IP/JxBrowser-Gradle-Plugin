@@ -239,7 +239,7 @@ public open class JxBrowserExtension(
                 "compose" to "8.0.0",
                 "kotlin" to "8.0.0",
                 "win64-arm" to "8.0.0",
-                "native-image" to "9.1.2",
+                "native-image" to "9.2.0",
             )
     }
 }
